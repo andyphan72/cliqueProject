@@ -41,15 +41,17 @@
 @synthesize txtMerchantAddress;
 @synthesize photoSeq;
 @synthesize scrollView = _scrollView;
+@synthesize photo1_taken;
+@synthesize photo2_taken;
+@synthesize photo3_taken;
 
-
+CGFloat animatedDistance;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
 static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
 static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
 static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
-CGFloat animatedDistance;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -79,6 +81,10 @@ CGFloat animatedDistance;
     //    self.pickerCategory.hidden=YES;
     _start_time.inputView = self.pickerTime;
     _end_time.inputView = self.pickerTime;
+    
+    photo1_taken = @"No";
+    photo2_taken = @"No";
+    photo3_taken = @"No";
     
 }
 
@@ -111,9 +117,33 @@ CGFloat animatedDistance;
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     [database open];
     
-    NSString *query = [NSString stringWithFormat:@"INSERT INTO company_business ('businessname', 'address_line1', 'address_line2', 'address_postcode', 'address_city', 'address_state', 'address_country', 'contact_phone1', 'contact_email', 'companyID', 'location') VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",_businessName.text,_address_line1.text,_address_line2.text,_address_postcode.text,_address_city.text,_address_state.text,_address_country.text,_phone.text,_email.text,_companyID,_address_location.text];
+    NSString *query = [NSString stringWithFormat:@"INSERT INTO company_business ('businessname', 'address_line1', 'address_line2', 'address_postcode', 'address_city', 'address_state', 'address_country', 'contact_phone1', 'contact_email', 'companyID', 'location', 'business_start_time', 'business_end_time') VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",_businessName.text,_address_line1.text,_address_line2.text,_address_postcode.text,_address_city.text,_address_state.text,_address_country.text,_phone.text,_email.text,_companyID,_address_location.text,_start_time.text,_end_time.text];
     
     [database executeUpdate:query];
+    
+    if (![photo_filename1 isEqualToString:@""]) {
+        NSString *businessID = @"1";
+        NSString *seq = @"1";
+        
+        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID,photo_filename1];
+        [database executeUpdate:query2];
+    }
+    if (![photo_filename2 isEqualToString:@""]) {
+        NSString *businessID = @"1";
+        NSString *seq = @"2";
+        
+        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID,photo_filename2];
+        [database executeUpdate:query2];
+    }
+    if (![photo_filename3 isEqualToString:@""]) {
+        NSString *businessID = @"1";
+        NSString *seq = @"3";
+        
+        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID,photo_filename3];
+        [database executeUpdate:query2];
+    }
+    
+    
     
     
     // Display Alert message after saving into database.
@@ -121,8 +151,6 @@ CGFloat animatedDistance;
                                                     message:@"New Business record saved." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
     
-    // To clear text fields
-    // [self clearTextfields];
     
     // To dismiss keyboard after save
     [self.view endEditing:YES];
@@ -284,6 +312,70 @@ CGFloat animatedDistance;
     self.view.frame = CGRectMake(0,-10,320,480);
     [UIView commitAnimations];
     
+    CGRect textFieldRect = [self.view.window convertRect:textField.bounds fromView:textField];
+    CGRect viewRect = [self.view.window convertRect:self.view.bounds fromView:self.view];
+    
+    CGFloat midline = textFieldRect.origin.y + 0.5 * textFieldRect.size.height;
+    CGFloat numerator =
+    midline - viewRect.origin.y
+    - MINIMUM_SCROLL_FRACTION * viewRect.size.height;
+    CGFloat denominator =
+    (MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)
+    * viewRect.size.height;
+    CGFloat heightFraction = numerator / denominator;
+    
+    if (heightFraction < 0.0)
+    {
+        heightFraction = 0.0;
+    }
+    else if (heightFraction > 1.0)
+    {
+        heightFraction = 1.0;
+    }
+    
+    UIInterfaceOrientation orientation =
+    [[UIApplication sharedApplication] statusBarOrientation];
+    if (orientation == UIInterfaceOrientationPortrait ||
+        orientation == UIInterfaceOrientationPortraitUpsideDown)
+    {
+        animatedDistance = floor(PORTRAIT_KEYBOARD_HEIGHT * heightFraction);
+    }
+    else
+    {
+        animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
+    }
+    
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y -= animatedDistance;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    
+    [self.view setFrame:viewFrame];
+    
+    [UIView commitAnimations];
+    
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y += animatedDistance;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    
+    [self.view setFrame:viewFrame];
+    
+    [UIView commitAnimations];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 
@@ -342,14 +434,34 @@ CGFloat animatedDistance;
 
     if ([photoSeq isEqualToString:@"1"]) {
         self.imageView1.image = chosenImage;
+        // saving image to Document folder
+        NSString *fname1 = [NSString stringWithFormat:@"%@_1",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        [self saveImage:self.imageView1.image forPerson:fname1];
+        photo_filename1 = [_businessName.text stringByAppendingString:@"_1.png"];
+        photo1_taken = @"Yes";
+        [_takePhoto2 setEnabled:YES];
+        
     }
     else if ([photoSeq isEqualToString:@"2"])
     {
         self.imageView2.image = chosenImage;
+        // saving image to Document folder
+        NSString *fname2 = [NSString stringWithFormat:@"%@_2",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        [self saveImage:self.imageView2.image forPerson:fname2];
+        photo_filename2 = [_businessName.text stringByAppendingString:@"_2.png"];
+        photo2_taken = @"Yes";
+        [_takePhoto3 setEnabled:YES];
+        
     }
     else if ([photoSeq isEqualToString:@"3"])
     {
         self.imageView3.image = chosenImage;
+        // saving image to Document folder
+        NSString *fname3 = [NSString stringWithFormat:@"%@_3",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        [self saveImage:self.imageView3.image forPerson:fname3];
+        photo_filename3 = [_businessName.text stringByAppendingString:@"_3.png"];
+        photo1_taken = @"Yes";
+        
     }
         
     [picker dismissViewControllerAnimated:YES completion:NULL];

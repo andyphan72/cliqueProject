@@ -24,6 +24,10 @@
     IBOutlet UILabel *longitudeLabel;
     IBOutlet UILabel *addressLabel;
     
+    NSString *photo_filename1;
+    NSString *photo_filename2;
+    NSString *photo_filename3;
+    
     CGPoint svos;
     
 }
@@ -44,6 +48,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UILabel *companylbl;
 @property (strong, nonatomic) IBOutlet NSString *companyID;
+
+@property (strong, nonatomic) NSString *photo1_taken;
+@property (strong, nonatomic) NSString *photo2_taken;
+@property (strong, nonatomic) NSString *photo3_taken;
 
 @property (strong, nonatomic) IBOutlet UITextField *txtLatitude;
 @property (strong, nonatomic) IBOutlet UITextField *txtLongitude;
@@ -68,8 +76,11 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView2;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView3;
 - (IBAction)takePhoto:  (UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIButton *takePhoto1;
 - (IBAction)takePhoto2:  (UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIButton *takePhoto2;
 - (IBAction)takePhoto3:  (UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIButton *takePhoto3;
 
 
 
