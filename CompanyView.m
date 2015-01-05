@@ -58,6 +58,7 @@
     
     _businessID = [[NSMutableArray alloc] init];
     _businessName = [[NSMutableArray alloc] init];
+    _businessphoto = [[NSMutableArray alloc] init];
     
     FMResultSet *results = [database executeQuery:@"select businessID, businessname from company_business where companyID = ?",[obj.companyData objectForKey:@"CompanyID"]];
     
@@ -65,12 +66,16 @@
         NSString *businessID = [results stringForColumn:@"businessID"];
         NSString *businessname = [results stringForColumn:@"businessname"];
         
-        
         totalRecords = totalRecords +1;
         
         [_businessID addObject:businessID];
         [_businessName addObject:businessname];
         
+        FMResultSet *results2 = [database executeQuery:@"select businessID, filename from business_photos where businessID = ? and seq = 1",businessID];
+        while([results2 next]) {
+            NSString *businessphoto = [results2 stringForColumn:@"filename"];
+            [_businessphoto addObject:businessphoto];
+        }
         
     }
     [database close];
@@ -211,21 +216,30 @@
 //    } else {
         //        cell.textLabel.text = [_companyName objectAtIndex:indexPath.row];
     
+
     
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 0, 50, 50)];
-        imgView.image = [UIImage imageNamed:@"photo1.png"];
-//        cell.imageView.image = imgView.image;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString* path = [documentsDirectory stringByAppendingPathComponent:[_businessphoto objectAtIndex:indexPath.row]];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 80, 50)];
+        imgView.image = [UIImage imageNamed:path];
+        //this is to add border to image
+        [imgView.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+        [imgView.layer setBorderWidth: 1.0];
+        //this is show only center part of image    
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
         [cell.contentView addSubview:imgView];
 
         //businessname
         [[cell.contentView viewWithTag:2001] removeFromSuperview ];
         NSString *business_name= [_businessName objectAtIndex:indexPath.row];
-        CGRect frame=CGRectMake(80,0, 250, 50);
+        CGRect frame=CGRectMake(110,0, 250, 50);
         UILabel *label1=[[UILabel alloc]init];
         label1.frame=frame;
         label1.text= business_name;
         label1.tag = 2001;
-        label1.font = [UIFont fontWithName:@"TreBuchet MS Bold" size:16];
+        label1.font = [UIFont fontWithName:@"TreBuchet MS Bold" size:14];
         [cell.contentView addSubview:label1];
         
         //category

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import <sqlite3.h>
 #import "FMDatabase.h"
 #import "FMResultSet.h"
@@ -32,5 +33,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *businessTableView;
 @property (retain, nonatomic) NSMutableArray *businessID;
 @property (retain, nonatomic) NSMutableArray *businessName;
+@property (retain, nonatomic) NSMutableArray *businessphoto;
 
 @end
