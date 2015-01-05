@@ -49,9 +49,8 @@
     
     [self.view endEditing:YES];
 
-
+    // Category piker
     self.pickerCategory = [[UIPickerView alloc] init];
-
     // Initialize Data
     _pickerCategoryData = @[@"Food", @"Entertainment", @"Social", @"Arts"];
     
@@ -175,6 +174,7 @@
 //this is to hide the Status bar
 - (BOOL)prefersStatusBarHidden {return YES;}
 
+//this is for textfield validation
 - (bool) Validation{
     
     if([[_txtCompanyName.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
