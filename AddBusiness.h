@@ -15,7 +15,7 @@
 #import <MapKit/MapKit.h>
 
 
-@interface AddBusiness : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate>
+@interface AddBusiness : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITextFieldDelegate,UIPickerViewDelegate>
 {
     
     CLLocationManager *locationManager;
@@ -38,6 +38,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *address_state;
 @property (strong, nonatomic) IBOutlet UITextField *address_country;
 @property (strong, nonatomic) IBOutlet UITextField *address_location;
+@property (strong, nonatomic) IBOutlet UITextField *start_time;
+@property (strong, nonatomic) IBOutlet UITextField *end_time;
 @property (strong, nonatomic) IBOutlet UITextField *phone;
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UILabel *companylbl;
@@ -53,7 +55,8 @@
 @property (strong, nonatomic) IBOutlet UITextView *txtMerchantAddress;
 @property (strong, nonatomic) NSString  *photoSeq;
 
-
+// This is for business start time and end time
+@property (strong, nonatomic) IBOutlet UIPickerView *pickerTime;
 
 
 - (IBAction)btnSaveBusiness:(id)sender;

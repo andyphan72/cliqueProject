@@ -12,6 +12,7 @@
 
 @interface AddBusiness (){
     DataClass *obj;
+    NSArray *_timepickerCategoryData;
 }
 
 @property (nonatomic) IBOutlet UIBarButtonItem* btnSaveBusiness;
@@ -67,7 +68,18 @@ CGFloat animatedDistance;
     _companylbl.text = [obj.companyData objectForKey:@"CompanyName"];
     _companyID = [obj.companyData objectForKey:@"CompanyID"];
     
-
+    // Time picker
+    self.pickerTime = [[UIPickerView alloc] init];
+    // Initialize Data
+    _timepickerCategoryData = @[@"8:00 AM", @"9:00 AM", @"10:00 AM", @"11:00 AM", @"12:00 PM", @"1:00 PM", @"2:00 PM", @"3:00 PM", @"4:00 PM", @"5:00 PM", @"6:00 PM", @"7:00 PM", @"9:00 PM", @"10:00 PM", @"11:00 PM", @"12:00 AM", @"1:00 AM", @"2:00 AM", @"3:00 AM", @"4:00 AM", @"5:00 AM", @"6:00 AM", @"7:00 AM"];
+    
+    // Connect data
+    self.pickerTime.dataSource = self;
+    self.pickerTime.delegate = self;
+    //    self.pickerCategory.hidden=YES;
+    _start_time.inputView = self.pickerTime;
+    _end_time.inputView = self.pickerTime;
+    
 }
 
 
@@ -265,14 +277,14 @@ CGFloat animatedDistance;
 }
 
 //this is to move UIView up when keayboard appear
-//- (void)textFieldDidBeginEditing:(UITextField *)textField
-//{
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:0.25];
-//    self.view.frame = CGRectMake(0,-10,320,480);
-//    [UIView commitAnimations];
-//    
-//}
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.25];
+    self.view.frame = CGRectMake(0,-10,320,480);
+    [UIView commitAnimations];
+    
+}
 
 
 //this is to capture photo of the business
@@ -373,5 +385,41 @@ CGFloat animatedDistance;
     [self saveData];
     
 }
+
+// The number of columns of data
+- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// The number of rows of data
+- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return _timepickerCategoryData.count;
+}
+
+// The data to return for the row and component (column) that's being passed in
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return _timepickerCategoryData[row];
+}
+
+// Catpure the picker view selection
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    // This method is triggered whenever the user makes a change to the picker selection.
+    // The parameter named row and component represents what was selected.
+    
+    if ([self.start_time isEditing]) {
+        _start_time.text = _timepickerCategoryData[row];
+    }
+    else if ([self.end_time isEditing]){
+        _end_time.text = _timepickerCategoryData[row];
+    }
+
+}
+
+
+
 
 @end
