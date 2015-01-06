@@ -96,6 +96,156 @@
     businesslbl.text = [obj.companyData objectForKey:@"BusinessName"];
     businesslbl.textColor = [UIColor whiteColor];
     
+    
+    //Load Event Table
+    FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
+    [eventdatabase open];
+    
+    _eventID = [[NSMutableArray alloc] init];
+    _eventName = [[NSMutableArray alloc] init];
+    
+    FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+    
+    while([results_event next]) {
+        NSString *eventID = [results_event stringForColumn:@"eventID"];
+        NSString *eventtitle = [results_event stringForColumn:@"event_title"];
+        
+        totalRecords = totalRecords +1;
+        
+        [_eventID addObject:eventID];
+        [_eventName addObject:eventtitle];
+        
+
+        
+    }
+    [eventdatabase close];
+    [self.myEventTableView reloadData];
+    
+}
+
+// to load database to tableview
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    //    if (tableView == self.searchDisplayController.searchResultsTableView) {
+    //        return [searchResults count];
+    //
+    //    } else {
+    return [_eventName count];
+    
+    //    }
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    
+    //Event Name
+    [[cell.contentView viewWithTag:2001] removeFromSuperview ];
+    NSString *event_name= [_eventName objectAtIndex:indexPath.row];
+    CGRect frame=CGRectMake(16,5, 250, 20);
+    UILabel *label1=[[UILabel alloc]init];
+    label1.frame=frame;
+    label1.text= event_name;
+    label1.tag = 2001;
+    label1.font = [UIFont fontWithName:@"Helvetica" size:14];
+    [cell.contentView addSubview:label1];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    
+    return cell;
+}
+
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+
+
+#pragma mark - UITableViewDataSource
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here for when you hit delete
+        
+        
+        NSString *eventIDtoDelete= [_eventID objectAtIndex:indexPath.row];
+        
+        NSString *dbName = @"cliqueDB.rdb";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDir = [documentPaths objectAtIndex:0];
+        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+        
+        FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
+        [eventdatabase open];
+        
+        [eventdatabase executeUpdate:@"Delete from event where eventID = ?", eventIDtoDelete, nil];
+        [eventdatabase close];
+        
+        // Display Alert message after saving into database.
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"EVENT "
+                                                        message:@"Event record deleted." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        
+        
+    }
+    
+    // reload tableview
+    [self ReloadTableData];
+    [self.myEventTableView reloadData];
+}
+
+
+- (void) ReloadTableData
+{
+    totalRecords = 0;
+    //reload Event table
+    BOOL success;
+    NSString *dbName = @"cliqueDB.rdb";
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [documentPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    success = [fileManager fileExistsAtPath:dbPath];
+    NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+    [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+    
+    FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
+    [eventdatabase open];
+    
+    _eventID = [[NSMutableArray alloc] init];
+    _eventName = [[NSMutableArray alloc] init];
+    
+    FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+    
+    while([results_event next]) {
+        NSString *eventID = [results_event stringForColumn:@"eventID"];
+        NSString *eventtitle = [results_event stringForColumn:@"event_title"];
+        
+        totalRecords = totalRecords +1;
+        
+        [_eventID addObject:eventID];
+        [_eventName addObject:eventtitle];
+        
+    }
+    [eventdatabase close];
+    [self.myEventTableView reloadData];
+
+    
 }
 
 //this is to hide the Status bar

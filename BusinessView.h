@@ -37,9 +37,15 @@
 @property (retain, nonatomic) NSString *businessphotos;
 
 
+
+
 // This is for Photo capturing
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
+@property (strong, nonatomic) IBOutlet UITableView *myEventTableView;
+@property (nonatomic, weak) IBOutlet UILabel* myEventTableTitle;
+@property (strong, nonatomic) IBOutlet UITableView *myServicesTableView;
+@property (strong, nonatomic) IBOutlet UITableView *myProductTableView;
 
 
 @end

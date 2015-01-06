@@ -34,13 +34,21 @@
     self.navigationController.navigationBarHidden = NO;
     NSLog(@"Navigation Controller %@",self.navigationController);
     
-    
     obj = [DataClass getInstance];
     CompanyDetails = [[NSDictionary alloc] init];
     companylbl.text = [obj.companyData objectForKey:@"CompanyName"];
     companyDescription.text = [obj.companyData objectForKey:@"CompanyDescription"];
     
     businessTableView.userInteractionEnabled = YES;
+    
+    // setting navigation bar transparent
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+    
     
     //fmdb start
     BOOL success;
@@ -59,6 +67,7 @@
     _businessID = [[NSMutableArray alloc] init];
     _businessName = [[NSMutableArray alloc] init];
     _businessphoto = [[NSMutableArray alloc] init];
+    _tbusinessphoto = [[NSMutableArray alloc] init];
     
     FMResultSet *results = [database executeQuery:@"select businessID, businessname from company_business where companyID = ?",[obj.companyData objectForKey:@"CompanyID"]];
     
@@ -72,10 +81,18 @@
         [_businessName addObject:businessname];
         
         FMResultSet *results2 = [database executeQuery:@"select businessID, filename from business_photos where businessID = ? and seq = 1",businessID];
+        totalPhotos = 0;
+        NSString *businessphoto;
         while([results2 next]) {
-            NSString *businessphoto = [results2 stringForColumn:@"filename"];
-            [_businessphoto addObject:businessphoto];
+            businessphoto = [results2 stringForColumn:@"filename"];
+            totalPhotos = totalPhotos +1;
         }
+        NSString *getTotal = [NSString stringWithFormat:@"%d",totalPhotos];
+        [_tbusinessphoto addObject:getTotal];
+        if ([getTotal isEqualToString:@"0"]) {
+            businessphoto = @" ";
+        }
+        [_businessphoto addObject:businessphoto];
         
     }
     [database close];
@@ -217,7 +234,8 @@
         //        cell.textLabel.text = [_companyName objectAtIndex:indexPath.row];
     
 
-    
+        //to display business photos
+    if (![[_tbusinessphoto objectAtIndex:indexPath.row] isEqualToString:@"0"]) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString* path = [documentsDirectory stringByAppendingPathComponent:[_businessphoto objectAtIndex:indexPath.row]];
@@ -226,15 +244,30 @@
         //this is to add border to image
         [imgView.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
         [imgView.layer setBorderWidth: 1.0];
-        //this is show only center part of image    
+        //this is show only center part of image
         imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.clipsToBounds = YES;
         [cell.contentView addSubview:imgView];
 
+    }
+    else{
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, 80, 50)];
+        imgView.image = [UIImage imageNamed:@"no-image.png"];
+        //this is to add border to image
+        [imgView.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+        [imgView.layer setBorderWidth: 1.0];
+        //this is show only center part of image
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;        
+        [cell.contentView addSubview:imgView];
+        
+    
+    }
+
         //businessname
         [[cell.contentView viewWithTag:2001] removeFromSuperview ];
         NSString *business_name= [_businessName objectAtIndex:indexPath.row];
-        CGRect frame=CGRectMake(110,0, 250, 50);
+        CGRect frame=CGRectMake(110,10, 250, 20);
         UILabel *label1=[[UILabel alloc]init];
         label1.frame=frame;
         label1.text= business_name;
@@ -242,31 +275,46 @@
         label1.font = [UIFont fontWithName:@"TreBuchet MS Bold" size:14];
         [cell.contentView addSubview:label1];
         
-        //category
-//        [[cell.contentView viewWithTag:2002] removeFromSuperview ];
-//        NSString *categorylbl= [_category objectAtIndex:indexPath.row];
-//        NSString *subcategorylbl= [_subcategory objectAtIndex:indexPath.row];
-//        CGRect frame2=CGRectMake(20,15, 200, 50);
-//        UILabel *label2=[[UILabel alloc]init];
-//        label2.frame=frame2;
+        //event
+        [[cell.contentView viewWithTag:2002] removeFromSuperview ];
+//        NSString *eventlbl= [_category objectAtIndex:indexPath.row];
+        NSString *eventlbl= @"Event :";
+        CGRect frame2=CGRectMake(110,30, 200, 20);
+        UILabel *label2=[[UILabel alloc]init];
+        label2.frame=frame2;
 //        NSString *labelToDisplay = [NSString stringWithFormat:@"Category : %@ (%@)", categorylbl, subcategorylbl];
-//        label2.text= labelToDisplay;
-//        label2.tag = 2002;
-//        label2.font = [UIFont fontWithName:@"TreBuchet MS" size:10];
-//        label2.textColor = [UIColor grayColor];
-//        [cell.contentView addSubview:label2];
-//        
-//        //Description
-//        [[cell.contentView viewWithTag:2003] removeFromSuperview ];
+        label2.text= eventlbl;
+        label2.tag = 2002;
+        label2.font = [UIFont fontWithName:@"TreBuchet MS" size:10];
+        label2.textColor = [UIColor lightGrayColor];
+        [cell.contentView addSubview:label2];
+
+        //Services
+        [[cell.contentView viewWithTag:2003] removeFromSuperview ];
 //        NSString *descriptionlbl= [_companyDescription objectAtIndex:indexPath.row];
-//        CGRect frame3=CGRectMake(20,27, 280, 50);
-//        UILabel *label3=[[UILabel alloc]init];
-//        label3.frame=frame3;
-//        label3.text= descriptionlbl;
-//        label3.tag = 2003;
-//        label3.font = [UIFont fontWithName:@"TreBuchet MS" size:10];
-//        label3.textColor = [UIColor lightGrayColor];
-//        [cell.contentView addSubview:label3];
+        NSString *serviceslbl= @"Services :";
+        CGRect frame3=CGRectMake(160,30, 200, 20);
+        UILabel *label3=[[UILabel alloc]init];
+        label3.frame=frame3;
+        label3.text= serviceslbl;
+        label3.tag = 2003;
+        label3.font = [UIFont fontWithName:@"TreBuchet MS" size:10];
+        label3.textColor = [UIColor lightGrayColor];
+        [cell.contentView addSubview:label3];
+    
+        //Services
+        [[cell.contentView viewWithTag:2004] removeFromSuperview ];
+//        NSString *descriptionlbl= [_companyDescription objectAtIndex:indexPath.row];
+        NSString *productslbl= @"Products :";
+        CGRect frame4=CGRectMake(230,30, 200, 20);
+        UILabel *label4=[[UILabel alloc]init];
+        label4.frame=frame4;
+        label4.text= productslbl;
+        label4.tag = 2004;
+        label4.font = [UIFont fontWithName:@"TreBuchet MS" size:10];
+        label4.textColor = [UIColor lightGrayColor];
+        [cell.contentView addSubview:label4];
+    
     
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         

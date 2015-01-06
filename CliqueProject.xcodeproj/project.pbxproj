@@ -48,6 +48,8 @@
 		A135061D1A57A67C00B628FF /* BusinessView.m in Sources */ = {isa = PBXBuildFile; fileRef = A135061C1A57A67C00B628FF /* BusinessView.m */; };
 		A135061F1A57A96100B628FF /* photo1.png in Resources */ = {isa = PBXBuildFile; fileRef = A135061E1A57A96100B628FF /* photo1.png */; };
 		A13506211A57A99D00B628FF /* photo2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A13506201A57A99D00B628FF /* photo2.jpeg */; };
+		A15E0E7C1A5B9085009AF3E1 /* AddEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A15E0E7B1A5B9085009AF3E1 /* AddEvent.m */; };
+		A15F5BEA1A5A91AD00DEB448 /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = A15F5BE91A5A91AD00DEB448 /* no-image.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +116,9 @@
 		A135061C1A57A67C00B628FF /* BusinessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessView.m; sourceTree = SOURCE_ROOT; };
 		A135061E1A57A96100B628FF /* photo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo1.png; sourceTree = SOURCE_ROOT; };
 		A13506201A57A99D00B628FF /* photo2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo2.jpeg; sourceTree = SOURCE_ROOT; };
+		A15E0E7A1A5B9085009AF3E1 /* AddEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEvent.h; sourceTree = SOURCE_ROOT; };
+		A15E0E7B1A5B9085009AF3E1 /* AddEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEvent.m; sourceTree = SOURCE_ROOT; };
+		A15F5BE91A5A91AD00DEB448 /* no-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image.png"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +233,7 @@
 		A12ADE671A51A69F00F98AB5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A15F5BE91A5A91AD00DEB448 /* no-image.png */,
 				A13506201A57A99D00B628FF /* photo2.jpeg */,
 				A135061E1A57A96100B628FF /* photo1.png */,
 				A12ADE681A51A6CE00F98AB5 /* doritos1.jpg */,
@@ -817,6 +823,8 @@
 				A13506191A53CC4A00B628FF /* AddBusiness.m */,
 				A135061B1A57A67C00B628FF /* BusinessView.h */,
 				A135061C1A57A67C00B628FF /* BusinessView.m */,
+				A15E0E7A1A5B9085009AF3E1 /* AddEvent.h */,
+				A15E0E7B1A5B9085009AF3E1 /* AddEvent.m */,
 			);
 			name = Company;
 			sourceTree = "<group>";
@@ -886,6 +894,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A15F5BEA1A5A91AD00DEB448 /* no-image.png in Resources */,
 				4EE9024B1964A28600AA3B42 /* Default.png in Resources */,
 				4EE902461964A27600AA3B42 /* reveal-icon.png in Resources */,
 				4EE9024C1964A28600AA3B42 /* Default-568h@2x.png in Resources */,
@@ -929,6 +938,7 @@
 				4EE9024E1964A29300AA3B42 /* main.m in Sources */,
 				A135061D1A57A67C00B628FF /* BusinessView.m in Sources */,
 				4EE9022C1964A14200AA3B42 /* AppDelegate.m in Sources */,
+				A15E0E7C1A5B9085009AF3E1 /* AddEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

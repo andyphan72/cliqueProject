@@ -22,6 +22,7 @@
     
     NSMutableArray *indexPaths;
     int totalRecords;
+    int totalPhotos;
     
     NSDictionary *CompanyDetails;
 
@@ -34,5 +35,6 @@
 @property (retain, nonatomic) NSMutableArray *businessID;
 @property (retain, nonatomic) NSMutableArray *businessName;
 @property (retain, nonatomic) NSMutableArray *businessphoto;
+@property (retain, nonatomic) NSMutableArray *tbusinessphoto;
 
 @end
