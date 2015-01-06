@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import <sqlite3.h>
 #import "FMDatabase.h"
 #import "FMResultSet.h"
@@ -20,6 +21,7 @@
     
     NSMutableArray *indexPaths;
     int totalRecords;
+    int totalPhotos;
     
     NSDictionary *CompanyDetails;
     
@@ -32,11 +34,11 @@
 @property (strong, nonatomic) IBOutlet UITableView *eventsTableView;
 @property (retain, nonatomic) NSMutableArray *eventID;
 @property (retain, nonatomic) NSMutableArray *eventName;
+@property (retain, nonatomic) NSString *businessphotos;
+
 
 // This is for Photo capturing
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UIButton *savePhotos;
-- (IBAction)takePhoto:  (UIButton *)sender;
 
 
 

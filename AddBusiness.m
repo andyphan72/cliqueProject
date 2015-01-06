@@ -121,25 +121,28 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     [database executeUpdate:query];
     
-    if (![photo_filename1 isEqualToString:@""]) {
-        NSString *businessID = @"1";
+    FMResultSet *resultsBusiness = [database executeQuery:@"select * from company_business order by businessID"];
+    businessID = 0;
+    while([resultsBusiness next]) {
+        businessID = [resultsBusiness intForColumn:@"businessID"];
+    }
+    
+    if ([photo1_taken isEqualToString:@"Yes"]) {
         NSString *seq = @"1";
-        
-        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID,photo_filename1];
+        NSString *businessID_str = [NSString stringWithFormat:@"%d",businessID];
+        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID_str,photo_filename1];
         [database executeUpdate:query2];
     }
-    if (![photo_filename2 isEqualToString:@""]) {
-        NSString *businessID = @"1";
+    if ([photo2_taken isEqualToString:@"Yes"]) {
         NSString *seq = @"2";
-        
-        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID,photo_filename2];
+        NSString *businessID_str = [NSString stringWithFormat:@"%d",businessID];
+        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID_str,photo_filename2];
         [database executeUpdate:query2];
     }
-    if (![photo_filename3 isEqualToString:@""]) {
-        NSString *businessID = @"1";
+    if ([photo3_taken isEqualToString:@"Yes"]) {
         NSString *seq = @"3";
-        
-        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID,photo_filename3];
+        NSString *businessID_str = [NSString stringWithFormat:@"%d",businessID];
+        NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID_str,photo_filename3];
         [database executeUpdate:query2];
     }
     
@@ -437,7 +440,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         // saving image to Document folder
         NSString *fname1 = [NSString stringWithFormat:@"%@_1",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
         [self saveImage:self.imageView1.image forPerson:fname1];
-        photo_filename1 = [_businessName.text stringByAppendingString:@"_1.png"];
+        photo_filename1 = [[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_1.png"];
         photo1_taken = @"Yes";
         [_takePhoto2 setEnabled:YES];
         
@@ -448,7 +451,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         // saving image to Document folder
         NSString *fname2 = [NSString stringWithFormat:@"%@_2",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
         [self saveImage:self.imageView2.image forPerson:fname2];
-        photo_filename2 = [_businessName.text stringByAppendingString:@"_2.png"];
+        photo_filename2 = [[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_2.png"];
         photo2_taken = @"Yes";
         [_takePhoto3 setEnabled:YES];
         
@@ -459,7 +462,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         // saving image to Document folder
         NSString *fname3 = [NSString stringWithFormat:@"%@_3",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
         [self saveImage:self.imageView3.image forPerson:fname3];
-        photo_filename3 = [_businessName.text stringByAppendingString:@"_3.png"];
+        photo_filename3 = [[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_3.png"];
         photo1_taken = @"Yes";
         
     }

@@ -30,6 +30,8 @@
     
     CGPoint svos;
     
+    int businessID;
+    
 }
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
