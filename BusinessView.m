@@ -100,12 +100,30 @@
     ServicesScreen = @"Down";
     ProductScreen = @"Down";
     
+    _eventView.hidden = YES;
+    _servicesView.hidden = YES;
+    _productsView.hidden = YES;
+    
+    
 }
 
 - (IBAction)btnEventView:(id)sender {
     
     
     if ([sender tag] == 1001) { // if event button is pressed
+        
+        _eventView.hidden = NO;
+        _servicesView.hidden = YES;
+        _productsView.hidden = YES;
+        
+        //uiview transition
+        self.eventView.alpha = 0.0;
+        [UIView beginAnimations:@"flip" context:nil];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        [UIView setAnimationDuration:1.0f];
+        self.eventView.alpha = 1.0;
+        [UIView commitAnimations];
 
         // animate move labelview up
         [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
@@ -157,6 +175,21 @@
         
     }
     else if ([sender tag] == 1002) {
+        
+        _eventView.hidden = YES;
+        _servicesView.hidden = NO;
+        _productsView.hidden = YES;
+        
+        //uiview transition
+        self.servicesView.alpha = 0.0;
+        [UIView beginAnimations:@"flip" context:nil];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        [UIView setAnimationDuration:1.0f];
+        self.servicesView.alpha = 1.0;
+        [UIView commitAnimations];
+        
+        
 
         // animate move labelview up
         [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
@@ -176,6 +209,21 @@
 
     }
     else if ([sender tag] == 1003) {
+        
+        _eventView.hidden = YES;
+        _servicesView.hidden = YES;
+        _productsView.hidden = NO;
+        
+        //uiview transition
+        self.productsView.alpha = 0.0;
+        [UIView beginAnimations:@"flip" context:nil];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        [UIView setAnimationDuration:1.0f];
+        self.productsView.alpha = 1.0;
+        [UIView commitAnimations];
+        
+        
 
         // animate move labelview up
         [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
@@ -195,6 +243,11 @@
         ProductScreen = @"Up";
     }
     else if ([sender tag] == 1004) {
+        
+        _eventView.hidden = YES;
+        _servicesView.hidden = YES;
+        _productsView.hidden = YES;
+        
 
         // animate move labelview down
         [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{

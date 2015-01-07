@@ -41,6 +41,8 @@
 @property (strong, nonatomic) IBOutlet UIView *labelView;
 @property (strong, nonatomic) IBOutlet UIView *botomView;
 @property (strong, nonatomic) IBOutlet UIView *eventView;
+@property (strong, nonatomic) IBOutlet UIView *servicesView;
+@property (strong, nonatomic) IBOutlet UIView *productsView;
 @property (strong, nonatomic) IBOutlet UIButton *btnEventView;
 @property (strong, nonatomic) IBOutlet UIButton *btnServicesView;
 
