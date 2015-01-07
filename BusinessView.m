@@ -24,7 +24,6 @@
 @synthesize companylbl;
 @synthesize companyDescription;
 @synthesize businesslbl;
-@synthesize eventsTableView;
 
 
 - (void)viewDidLoad {
@@ -41,8 +40,6 @@
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-    
-    eventsTableView.userInteractionEnabled = YES;
     
     //fmdb start
     BOOL success;
@@ -104,6 +101,36 @@
     _servicesView.hidden = YES;
     _productsView.hidden = YES;
     
+    //This is to count the number of records in Event table
+    FMDatabase *eventdb = [FMDatabase databaseWithPath:dbPath];
+    [eventdb open];
+    FMResultSet *event1 = [eventdb executeQuery:@"select count(*) as eventcount from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+    while([event1 next]) {
+        totalEventRecords = [event1 intForColumn:@"eventcount"];
+    }
+    _eventCountlbl.text = [NSString stringWithFormat:@"%d",totalEventRecords];
+    [eventdb close];
+    
+
+    //This is to count the number of records in Services table
+    FMDatabase *servicesdb = [FMDatabase databaseWithPath:dbPath];
+    [servicesdb open];
+    FMResultSet *services1 = [servicesdb executeQuery:@"select count(*) as servicescount from services where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+    while([services1 next]) {
+        totalServicesRecords = [services1 intForColumn:@"servicescount"];
+    }
+    _servicesCountlbl.text = [NSString stringWithFormat:@"%d",totalServicesRecords];
+
+    //This is to count the number of records in Products table
+    FMDatabase *productdb = [FMDatabase databaseWithPath:dbPath];
+    [productdb open];
+    FMResultSet *product1 = [servicesdb executeQuery:@"select count(*) as productcount from product where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+    while([product1 next]) {
+        totalProductRecords = [product1 intForColumn:@"productcount"];
+    }
+    _productCountlbl.text = [NSString stringWithFormat:@"%d",totalProductRecords];
+    
+    
     
 }
 
@@ -141,6 +168,9 @@
             NSLog(@"Animation is complete");
         }];
         EventScreen = @"Up";
+        ServicesScreen = @"Down";
+        ProductScreen = @"Down";
+        
         //Load Event Table
         BOOL success;
         NSString *dbName = @"cliqueDB.rdb";
@@ -171,6 +201,7 @@
             
         }
         [eventdatabase close];
+        _myEventTableView.userInteractionEnabled = YES;        
         [self.myEventTableView reloadData];
         
     }
@@ -189,8 +220,6 @@
         self.servicesView.alpha = 1.0;
         [UIView commitAnimations];
         
-        
-
         // animate move labelview up
         [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
             _labelView.frame = CGRectMake(_labelView.frame.origin.x, 80, _labelView.bounds.size.width, 80);
@@ -205,7 +234,43 @@
         }completion:^(BOOL finished) {
             NSLog(@"Animation is complete");
         }];
+        EventScreen = @"Down";
         ServicesScreen = @"Up";
+        ProductScreen = @"Down";
+        
+        
+        //Load Services Table
+        BOOL success;
+        NSString *dbName = @"cliqueDB.rdb";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDir = [documentPaths objectAtIndex:0];
+        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        success = [fileManager fileExistsAtPath:dbPath];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+        
+        FMDatabase *servicesdatabase = [FMDatabase databaseWithPath:dbPath];
+        [servicesdatabase open];
+        
+        _servicesID = [[NSMutableArray alloc] init];
+        _servicesName = [[NSMutableArray alloc] init];
+        
+        FMResultSet *results_services = [servicesdatabase executeQuery:@"select servicesID, services_name from services where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+        
+        while([results_services next]) {
+            NSString *servicesID = [results_services stringForColumn:@"servicesID"];
+            NSString *servicestitle = [results_services stringForColumn:@"services_name"];
+            
+            totalRecords = totalRecords +1;
+            
+            [_servicesID addObject:servicesID];
+            [_servicesName addObject:servicestitle];
+            
+        }
+        [servicesdatabase close];
+        [self.myServicesTableView reloadData];
+        
 
     }
     else if ([sender tag] == 1003) {
@@ -240,7 +305,44 @@
         }completion:^(BOOL finished) {
             NSLog(@"Animation is complete");
         }];
+        EventScreen = @"Down";
+        ServicesScreen = @"Down";
         ProductScreen = @"Up";
+        
+        //Load Products Table
+        BOOL success;
+        NSString *dbName = @"cliqueDB.rdb";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDir = [documentPaths objectAtIndex:0];
+        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        success = [fileManager fileExistsAtPath:dbPath];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+        
+        FMDatabase *productsdatabase = [FMDatabase databaseWithPath:dbPath];
+        [productsdatabase open];
+        
+        _productID = [[NSMutableArray alloc] init];
+        _productName = [[NSMutableArray alloc] init];
+        
+        FMResultSet *results_products = [productsdatabase executeQuery:@"select productID, product_name from product where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+        
+        while([results_products next]) {
+            NSString *productID = [results_products stringForColumn:@"productID"];
+            NSString *productname = [results_products stringForColumn:@"product_name"];
+            
+            totalRecords = totalRecords +1;
+            
+            [_productID addObject:productID];
+            [_productName addObject:productname];
+            
+        }
+        [productsdatabase close];
+        [self.myProductTableView reloadData];
+        
+        
+        
     }
     else if ([sender tag] == 1004) {
         
@@ -276,13 +378,20 @@
 // to load database to tableview
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //    if (tableView == self.searchDisplayController.searchResultsTableView) {
-    //        return [searchResults count];
-    //
-    //    } else {
-    return [_eventName count];
-    
-    //    }
+    if ([EventScreen isEqualToString:@"Up"]) {
+        return [_eventName count];
+    }
+    else if ([ServicesScreen isEqualToString:@"Up"]) {
+        return [_servicesName count];
+    }
+    else if ([ProductScreen isEqualToString:@"Up"]) {
+        return [_productName count];
+    }
+    else
+    {
+        return 0;
+    }
+
 }
 
 
@@ -290,24 +399,59 @@
 {
     
     static NSString *CellIdentifier = @"Cell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     
-    //Event Name
-    [[cell.contentView viewWithTag:2001] removeFromSuperview ];
-    NSString *event_name= [_eventName objectAtIndex:indexPath.row];
-    CGRect frame=CGRectMake(16,5, 250, 20);
-    UILabel *label1=[[UILabel alloc]init];
-    label1.frame=frame;
-    label1.text= event_name;
-    label1.tag = 2001;
-    label1.font = [UIFont fontWithName:@"Helvetica" size:14];
-    [cell.contentView addSubview:label1];
     
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    if ([EventScreen isEqualToString:@"Up"]) {
+        
+        //Event Name
+        [[cell.contentView viewWithTag:2001] removeFromSuperview ];
+        NSString *event_name= [_eventName objectAtIndex:indexPath.row];
+        CGRect frame=CGRectMake(16,5, 250, 20);
+        UILabel *label1=[[UILabel alloc]init];
+        label1.frame=frame;
+        label1.text= event_name;
+        label1.tag = 2001;
+        label1.font = [UIFont fontWithName:@"Helvetica" size:14];
+        [cell.contentView addSubview:label1];
     
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    else if ([ServicesScreen isEqualToString:@"Up"]) {
+        
+        //Services Name
+        [[cell.contentView viewWithTag:2001] removeFromSuperview ];
+        NSString *services_name= [_servicesName objectAtIndex:indexPath.row];
+        CGRect frame=CGRectMake(16,5, 250, 20);
+        UILabel *label1=[[UILabel alloc]init];
+        label1.frame=frame;
+        label1.text= services_name;
+        label1.tag = 2001;
+        label1.font = [UIFont fontWithName:@"Helvetica" size:14];
+        [cell.contentView addSubview:label1];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    else if ([ProductScreen isEqualToString:@"Up"]) {
+        
+        //Product Name
+        [[cell.contentView viewWithTag:2001] removeFromSuperview ];
+        NSString *products_name= [_productName objectAtIndex:indexPath.row];
+        CGRect frame=CGRectMake(16,5, 250, 20);
+        UILabel *label1=[[UILabel alloc]init];
+        label1.frame=frame;
+        label1.text= products_name;
+        label1.tag = 2001;
+        label1.font = [UIFont fontWithName:@"Helvetica" size:14];
+        [cell.contentView addSubview:label1];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    
+        
+        
     return cell;
 }
 

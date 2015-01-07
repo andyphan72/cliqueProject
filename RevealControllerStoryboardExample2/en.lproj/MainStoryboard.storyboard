@@ -861,20 +861,27 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1O7-hO-Kwx">
                                                         <rect key="frame" x="0.0" y="8" width="107" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="AyK-KM-uBT">
                                                         <rect key="frame" x="0.0" y="0.0" width="107" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" title="Button">
+                                                        <state key="normal">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="btnEventView:" destination="AH3-qE-ed4" eventType="touchUpInside" id="CON-Wc-R6m"/>
                                                         </connections>
                                                     </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A1F-si-xS3" userLabel="EventCountlbl">
+                                                        <rect key="frame" x="0.0" y="21" width="106" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="35"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -885,20 +892,27 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Services" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iJO-mN-mTf">
                                                         <rect key="frame" x="0.0" y="8" width="106" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9mU-3i-C1S">
                                                         <rect key="frame" x="0.0" y="0.0" width="106" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" title="Button">
+                                                        <state key="normal">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="btnEventView:" destination="AH3-qE-ed4" eventType="touchUpInside" id="ATz-L7-bsz"/>
                                                         </connections>
                                                     </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="34r-tw-q2L" userLabel="ServicesCountlbl">
+                                                        <rect key="frame" x="0.0" y="24" width="106" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="35"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                             </view>
@@ -909,20 +923,27 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Products" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LWz-lQ-4hX">
                                                         <rect key="frame" x="0.0" y="8" width="106" height="21"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oQq-un-2Mm">
                                                         <rect key="frame" x="0.0" y="0.0" width="106" height="80"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <state key="normal" title="Button">
+                                                        <state key="normal">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
                                                             <action selector="btnEventView:" destination="AH3-qE-ed4" eventType="touchUpInside" id="qfX-hC-JYB"/>
                                                         </connections>
                                                     </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BEH-wn-sa3" userLabel="ProductCountlbl">
+                                                        <rect key="frame" x="0.0" y="24" width="106" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="35"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
@@ -960,13 +981,16 @@
                         <outlet property="btnEventView" destination="AyK-KM-uBT" id="T14-fT-hdg"/>
                         <outlet property="businesslbl" destination="aJ9-Y1-9m9" id="bk6-JU-UAM"/>
                         <outlet property="companylbl" destination="iN1-cY-dJY" id="YkH-aH-TWU"/>
+                        <outlet property="eventCountlbl" destination="A1F-si-xS3" id="J3o-o4-ohc"/>
                         <outlet property="eventView" destination="zPj-vb-ykN" id="7h7-fi-vT1"/>
                         <outlet property="imageView" destination="yc3-gy-NB8" id="G9A-P9-Uk1"/>
                         <outlet property="labelView" destination="rkM-zH-y9V" id="sd7-iJ-cuQ"/>
                         <outlet property="myEventTableView" destination="htz-zh-EWO" id="Ec8-Qy-Dwb"/>
                         <outlet property="myProductTableView" destination="RqA-hp-qlv" id="vA4-D8-hNp"/>
                         <outlet property="myServicesTableView" destination="msz-M7-PPL" id="NWh-i2-mOS"/>
+                        <outlet property="productCountlbl" destination="BEH-wn-sa3" id="yOz-3j-u9h"/>
                         <outlet property="productsView" destination="RME-Pp-Qjb" id="AAT-qI-RRb"/>
+                        <outlet property="servicesCountlbl" destination="34r-tw-q2L" id="ysj-lI-ief"/>
                         <outlet property="servicesView" destination="GNC-Bv-EwC" id="gZN-TA-yJb"/>
                     </connections>
                 </viewController>
@@ -1740,13 +1764,13 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="OE9-CE-qWx"/>
         <segue reference="8Cx-KQ-7u8"/>
-        <segue reference="Ip7-p1-f6R"/>
+        <segue reference="OE9-CE-qWx"/>
         <segue reference="gNO-BH-PtK"/>
         <segue reference="fqN-Vl-nvu"/>
         <segue reference="BUA-fN-D6i"/>
-        <segue reference="jeY-zi-tu9"/>
+        <segue reference="Ip7-p1-f6R"/>
         <segue reference="rmv-q8-QlB"/>
+        <segue reference="sAF-EB-hm3"/>
     </inferredMetricsTieBreakers>
 </document>

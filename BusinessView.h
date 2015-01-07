@@ -23,6 +23,14 @@
     int totalRecords;
     int totalPhotos;
     
+    int totalEventRecords;
+    int totalServicesRecords;
+    int totalProductRecords;
+    
+    NSString *totalEventRecords_str;
+    NSString *totalServicesRecords_str;
+    NSString *totalProductRecords_str;
+    
     NSDictionary *CompanyDetails;
     NSString *EventScreen;
     NSString *ServicesScreen;
@@ -33,9 +41,25 @@
 @property (nonatomic, strong) IBOutlet UILabel *companyDescription;
 @property (nonatomic, strong) IBOutlet UILabel *businesslbl;
 
-@property (strong, nonatomic) IBOutlet UITableView *eventsTableView;
+// event
 @property (retain, nonatomic) NSMutableArray *eventID;
 @property (retain, nonatomic) NSMutableArray *eventName;
+@property (strong, nonatomic) IBOutlet UITableView *myEventTableView;
+@property (nonatomic, weak) IBOutlet UILabel* myEventTableTitle;
+@property (strong, nonatomic) IBOutlet UILabel *eventCountlbl;
+
+// services
+@property (retain, nonatomic) NSMutableArray *servicesID;
+@property (retain, nonatomic) NSMutableArray *servicesName;
+@property (strong, nonatomic) IBOutlet UITableView *myServicesTableView;
+@property (strong, nonatomic) IBOutlet UILabel *servicesCountlbl;
+
+// producrs
+@property (retain, nonatomic) NSMutableArray *productID;
+@property (retain, nonatomic) NSMutableArray *productName;
+@property (strong, nonatomic) IBOutlet UITableView *myProductTableView;
+@property (strong, nonatomic) IBOutlet UILabel *productCountlbl;
+
 @property (retain, nonatomic) NSString *businessphotos;
 
 @property (strong, nonatomic) IBOutlet UIView *labelView;
@@ -46,16 +70,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnEventView;
 @property (strong, nonatomic) IBOutlet UIButton *btnServicesView;
 
-
 // This is for Photo capturing
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-
-@property (strong, nonatomic) IBOutlet UITableView *myEventTableView;
-@property (nonatomic, weak) IBOutlet UILabel* myEventTableTitle;
-@property (strong, nonatomic) IBOutlet UITableView *myServicesTableView;
-@property (strong, nonatomic) IBOutlet UITableView *myProductTableView;
-
-
-
 
 @end
