@@ -432,7 +432,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
+
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
 
     if ([photoSeq isEqualToString:@"1"]) {
@@ -488,13 +488,22 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     //  Append the filename and get the full image path
     NSString *savedImagePath = [documentsDirectory stringByAppendingPathComponent:filename];
     
+    UIImage *chosenImage = image;
+    NSData *data = UIImagePNGRepresentation(chosenImage);
+    chosenImage = [UIImage imageWithCGImage:[UIImage imageWithData:data].CGImage
+                                           scale:chosenImage.scale
+                                     orientation:UIImageOrientationDown];
+        
+    
     //  Now convert the image to PNG/JPEG and write it to the image path
-    NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImagePNGRepresentation(chosenImage);
     [imageData writeToFile:savedImagePath atomically:NO];
     
     //  Here you save the savedImagePath to your DB
     
 }
+
+
 
 - (IBAction)btnSavePhoto:(id)sender {
     [self saveData];
