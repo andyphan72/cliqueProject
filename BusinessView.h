@@ -24,7 +24,9 @@
     int totalPhotos;
     
     NSDictionary *CompanyDetails;
-    
+    NSString *EventScreen;
+    NSString *ServicesScreen;
+    NSString *ProductScreen;
 }
 
 @property (nonatomic, strong) IBOutlet UILabel *companylbl;
@@ -36,7 +38,11 @@
 @property (retain, nonatomic) NSMutableArray *eventName;
 @property (retain, nonatomic) NSString *businessphotos;
 
-
+@property (strong, nonatomic) IBOutlet UIView *labelView;
+@property (strong, nonatomic) IBOutlet UIView *botomView;
+@property (strong, nonatomic) IBOutlet UIView *eventView;
+@property (strong, nonatomic) IBOutlet UIButton *btnEventView;
+@property (strong, nonatomic) IBOutlet UIButton *btnServicesView;
 
 
 // This is for Photo capturing
@@ -46,6 +52,8 @@
 @property (nonatomic, weak) IBOutlet UILabel* myEventTableTitle;
 @property (strong, nonatomic) IBOutlet UITableView *myServicesTableView;
 @property (strong, nonatomic) IBOutlet UITableView *myProductTableView;
+
+
 
 
 @end

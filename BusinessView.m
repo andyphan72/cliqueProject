@@ -75,53 +75,150 @@
         _imageView.clipsToBounds = YES;
         _imageView.image = [UIImage imageNamed:path];
         
-        //this is to add border to image
     }
     else{
         _imageView.image = [UIImage imageNamed:@"no-image.png"];
     }
     
-    CAGradientLayer *l = [CAGradientLayer layer];
-    l.frame = _imageView.bounds;
-    l.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil];
-    
-    
-    l.startPoint = CGPointMake(0.5f, 0.7);
-    l.endPoint = CGPointMake(0.5f, 1.0f);
-    
-    //you can change the direction, obviously, this would be top to bottom fade
-    _imageView.layer.mask = l;
+//    CAGradientLayer *l = [CAGradientLayer layer];
+//    l.frame = _imageView.bounds;
+//    l.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil];
+//    
+//    
+//    l.startPoint = CGPointMake(0.5f, 0.7);
+//    l.endPoint = CGPointMake(0.5f, 1.0f);
+//    
+//    //you can change the direction, obviously, this would be top to bottom fade
+//    _imageView.layer.mask = l;
 
     companylbl.text = [obj.companyData objectForKey:@"CompanyName"];
     businesslbl.text = [obj.companyData objectForKey:@"BusinessName"];
     businesslbl.textColor = [UIColor whiteColor];
     
-    
-    //Load Event Table
-    FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
-    [eventdatabase open];
-    
-    _eventID = [[NSMutableArray alloc] init];
-    _eventName = [[NSMutableArray alloc] init];
-    
-    FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
-    
-    while([results_event next]) {
-        NSString *eventID = [results_event stringForColumn:@"eventID"];
-        NSString *eventtitle = [results_event stringForColumn:@"event_title"];
-        
-        totalRecords = totalRecords +1;
-        
-        [_eventID addObject:eventID];
-        [_eventName addObject:eventtitle];
-        
-
-        
-    }
-    [eventdatabase close];
-    [self.myEventTableView reloadData];
+    // Initialized the screen button
+    EventScreen = @"Down";
+    ServicesScreen = @"Down";
+    ProductScreen = @"Down";
     
 }
+
+- (IBAction)btnEventView:(id)sender {
+    
+    
+    if ([sender tag] == 1001) { // if event button is pressed
+
+        // animate move labelview up
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _labelView.frame = CGRectMake(_labelView.frame.origin.x, 80, _labelView.bounds.size.width, 80);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+        
+        // animate move eventview up
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _botomView.frame = CGRectMake(_botomView.frame.origin.x, 150, _botomView.bounds.size.width, 418);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+        EventScreen = @"Up";
+        //Load Event Table
+        BOOL success;
+        NSString *dbName = @"cliqueDB.rdb";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDir = [documentPaths objectAtIndex:0];
+        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        success = [fileManager fileExistsAtPath:dbPath];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+        
+        FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
+        [eventdatabase open];
+        
+        _eventID = [[NSMutableArray alloc] init];
+        _eventName = [[NSMutableArray alloc] init];
+        
+        FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+        
+        while([results_event next]) {
+            NSString *eventID = [results_event stringForColumn:@"eventID"];
+            NSString *eventtitle = [results_event stringForColumn:@"event_title"];
+            
+            totalRecords = totalRecords +1;
+            
+            [_eventID addObject:eventID];
+            [_eventName addObject:eventtitle];
+            
+        }
+        [eventdatabase close];
+        [self.myEventTableView reloadData];
+        
+    }
+    else if ([sender tag] == 1002) {
+
+        // animate move labelview up
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _labelView.frame = CGRectMake(_labelView.frame.origin.x, 80, _labelView.bounds.size.width, 80);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+        // animate move Services viw up
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _botomView.frame = CGRectMake(_botomView.frame.origin.x, 150, _botomView.bounds.size.width, 418);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+        ServicesScreen = @"Up";
+
+    }
+    else if ([sender tag] == 1003) {
+
+        // animate move labelview up
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _labelView.frame = CGRectMake(_labelView.frame.origin.x, 80, _labelView.bounds.size.width, 80);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+        
+        // animate move Products view up
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _botomView.frame = CGRectMake(_botomView.frame.origin.x, 150, _botomView.bounds.size.width, 418);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+        ProductScreen = @"Up";
+    }
+    else if ([sender tag] == 1004) {
+
+        // animate move labelview down
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _labelView.frame = CGRectMake(_labelView.frame.origin.x, 420, _labelView.bounds.size.width, 80);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+
+        // animate move bottomview down
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _botomView.frame = CGRectMake(_botomView.frame.origin.x, 489, _botomView.bounds.size.width, 418);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+        EventScreen = @"Down";
+        ServicesScreen = @"Down";
+        ProductScreen = @"Down";
+    }
+
+    
+}
+
 
 // to load database to tableview
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
