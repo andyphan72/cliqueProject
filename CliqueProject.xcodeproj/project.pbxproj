@@ -48,6 +48,8 @@
 		A135061D1A57A67C00B628FF /* BusinessView.m in Sources */ = {isa = PBXBuildFile; fileRef = A135061C1A57A67C00B628FF /* BusinessView.m */; };
 		A135061F1A57A96100B628FF /* photo1.png in Resources */ = {isa = PBXBuildFile; fileRef = A135061E1A57A96100B628FF /* photo1.png */; };
 		A13506211A57A99D00B628FF /* photo2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A13506201A57A99D00B628FF /* photo2.jpeg */; };
+		A1526B9E1A5CE79E002DA089 /* AddServices.m in Sources */ = {isa = PBXBuildFile; fileRef = A1526B9D1A5CE79E002DA089 /* AddServices.m */; };
+		A1526BA11A5D0510002DA089 /* AddProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = A1526BA01A5D0510002DA089 /* AddProduct.m */; };
 		A15E0E7C1A5B9085009AF3E1 /* AddEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A15E0E7B1A5B9085009AF3E1 /* AddEvent.m */; };
 		A15F5BEA1A5A91AD00DEB448 /* no-image.png in Resources */ = {isa = PBXBuildFile; fileRef = A15F5BE91A5A91AD00DEB448 /* no-image.png */; };
 /* End PBXBuildFile section */
@@ -116,6 +118,10 @@
 		A135061C1A57A67C00B628FF /* BusinessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessView.m; sourceTree = SOURCE_ROOT; };
 		A135061E1A57A96100B628FF /* photo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo1.png; sourceTree = SOURCE_ROOT; };
 		A13506201A57A99D00B628FF /* photo2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo2.jpeg; sourceTree = SOURCE_ROOT; };
+		A1526B9C1A5CE79E002DA089 /* AddServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddServices.h; sourceTree = SOURCE_ROOT; };
+		A1526B9D1A5CE79E002DA089 /* AddServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddServices.m; sourceTree = SOURCE_ROOT; };
+		A1526B9F1A5D0510002DA089 /* AddProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProduct.h; sourceTree = SOURCE_ROOT; };
+		A1526BA01A5D0510002DA089 /* AddProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProduct.m; sourceTree = SOURCE_ROOT; };
 		A15E0E7A1A5B9085009AF3E1 /* AddEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEvent.h; sourceTree = SOURCE_ROOT; };
 		A15E0E7B1A5B9085009AF3E1 /* AddEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEvent.m; sourceTree = SOURCE_ROOT; };
 		A15F5BE91A5A91AD00DEB448 /* no-image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-image.png"; sourceTree = SOURCE_ROOT; };
@@ -825,6 +831,10 @@
 				A135061C1A57A67C00B628FF /* BusinessView.m */,
 				A15E0E7A1A5B9085009AF3E1 /* AddEvent.h */,
 				A15E0E7B1A5B9085009AF3E1 /* AddEvent.m */,
+				A1526B9C1A5CE79E002DA089 /* AddServices.h */,
+				A1526B9D1A5CE79E002DA089 /* AddServices.m */,
+				A1526B9F1A5D0510002DA089 /* AddProduct.h */,
+				A1526BA01A5D0510002DA089 /* AddProduct.m */,
 			);
 			name = Company;
 			sourceTree = "<group>";
@@ -927,6 +937,7 @@
 				A135060F1A52C74F00B628FF /* AddBusinessMain.m in Sources */,
 				A13506021A522CDC00B628FF /* FMDatabase.m in Sources */,
 				4EE902341964A1DE00AA3B42 /* MenuViewController.m in Sources */,
+				A1526BA11A5D0510002DA089 /* AddProduct.m in Sources */,
 				4EE902421964A25D00AA3B42 /* ColorViewController.m in Sources */,
 				A13505ED1A522C1200B628FF /* MerchantListing.m in Sources */,
 				A13506091A5278BB00B628FF /* AddCompany.m in Sources */,
@@ -939,6 +950,7 @@
 				A135061D1A57A67C00B628FF /* BusinessView.m in Sources */,
 				4EE9022C1964A14200AA3B42 /* AppDelegate.m in Sources */,
 				A15E0E7C1A5B9085009AF3E1 /* AddEvent.m in Sources */,
+				A1526B9E1A5CE79E002DA089 /* AddServices.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
