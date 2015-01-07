@@ -41,7 +41,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    return 8;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -51,23 +51,23 @@
     switch ( indexPath.row )
     {
         case 0:
-            CellIdentifier = @"newsfeed";
+            CellIdentifier = @"home";
             break;
             
         case 1:
-            CellIdentifier = @"wtd";
+            CellIdentifier = @"nearby";
             break;
 
         case 2:
-            CellIdentifier = @"weekend";
+            CellIdentifier = @"today";
             break;
             
         case 3:
-            CellIdentifier = @"hot";
+            CellIdentifier = @"friends";
             break;
 
         case 4:
-            CellIdentifier = @"lookAround";
+            CellIdentifier = @"search";
             break;
 
         case 5:
@@ -83,9 +83,9 @@
             CellIdentifier = @"companylisting";
             break;
             
-        case 8:
-            CellIdentifier = @"companyadd";
-            break;
+//        case 8:
+//            CellIdentifier = @"companyadd";
+//            break;
             
             
     }
