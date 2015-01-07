@@ -110,7 +110,6 @@
     }
     _eventCountlbl.text = [NSString stringWithFormat:@"%d",totalEventRecords];
     [eventdb close];
-    
 
     //This is to count the number of records in Services table
     FMDatabase *servicesdb = [FMDatabase databaseWithPath:dbPath];
@@ -120,7 +119,8 @@
         totalServicesRecords = [services1 intForColumn:@"servicescount"];
     }
     _servicesCountlbl.text = [NSString stringWithFormat:@"%d",totalServicesRecords];
-
+    [servicesdb close];
+    
     //This is to count the number of records in Products table
     FMDatabase *productdb = [FMDatabase databaseWithPath:dbPath];
     [productdb open];
@@ -129,8 +129,7 @@
         totalProductRecords = [product1 intForColumn:@"productcount"];
     }
     _productCountlbl.text = [NSString stringWithFormat:@"%d",totalProductRecords];
-    
-    
+    [productdb close];
     
 }
 
