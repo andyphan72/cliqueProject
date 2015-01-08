@@ -18,6 +18,9 @@
     NSString *photo_filename;
     int eventID;
     
+    CGPoint textFieldPoint;
+    UITextField *curentlyBeingEditingTextField;
+    
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *businessNamelbl;
@@ -38,6 +41,8 @@
 - (IBAction)takePhoto:  (UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIButton *takePhoto;
 
+@property (strong, nonatomic) IBOutlet UIDatePicker *startDatePicker;
+@property (weak, nonatomic) IBOutlet UIScrollView *addEventView;
 
 
 

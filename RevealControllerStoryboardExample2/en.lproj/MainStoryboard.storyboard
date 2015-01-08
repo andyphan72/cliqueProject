@@ -1103,7 +1103,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardType="alphabet" keyboardAppearance="light"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="light"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0x1-w1-vJS">
                                         <rect key="frame" x="10" y="424" width="31" height="21"/>
@@ -1173,6 +1173,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="700"/>
                     <connections>
+                        <outlet property="addEventView" destination="1vN-TY-TZG" id="zQ0-ha-pde"/>
                         <outlet property="businessNamelbl" destination="V7Y-Tt-eQr" id="tyo-2t-3Az"/>
                         <outlet property="companyNamelbl" destination="COT-rl-LLM" id="KPF-Xa-4eS"/>
                         <outlet property="imgEventPhoto" destination="3dG-k3-Mze" id="PPv-um-lV4"/>
@@ -1780,10 +1781,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="fqN-Vl-nvu"/>
+        <segue reference="qZB-mc-Yt2"/>
         <segue reference="8Cx-KQ-7u8"/>
         <segue reference="OE9-CE-qWx"/>
-        <segue reference="qZB-mc-Yt2"/>
-        <segue reference="fqN-Vl-nvu"/>
         <segue reference="kUM-3N-GvE"/>
         <segue reference="rmv-q8-QlB"/>
         <segue reference="sAF-EB-hm3"/>

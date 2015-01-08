@@ -54,8 +54,17 @@
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
     
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    [datePicker addTarget:self action:@selector(updateTextField:)
+         forControlEvents:UIControlEventValueChanged];
+    [self.txtStartDate setInputView:datePicker];
+    [self.txtEndDate setInputView:datePicker];
     
-    
+    //set textfield delefate for scrolling screen up when keyboard or picker appear. This will call the textFieldDidBeginEditing
+    self.txtStartDate.delegate=self;
+    self.txtEndDate.delegate=self;
+    self.txtEventVenue.delegate=self;
     
 }
 
@@ -190,6 +199,67 @@
     
     //  Here you save the savedImagePath to your DB
     
+}
+
+-(void)updateTextField:(UIDatePicker *)sender
+{
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd-MM-yyyy HH:mm"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"Berlin"]];
+    
+    if ([self.txtStartDate isEditing]) {
+        self.txtStartDate.text = [dateFormat stringFromDate:sender.date];
+    }
+    else if([self.txtEndDate isEditing]){
+        self.txtEndDate.text = [dateFormat stringFromDate:sender.date];
+    }
+
+
+}
+
+
+#define kOFFSET_FOR_KEYBOARD 170.0
+
+-(void)textFieldDidBeginEditing:(UITextField *)sender
+{
+    if ([sender isEqual:_txtStartDate] || [sender isEqual:_txtEndDate] || [sender isEqual:_txtEventVenue])
+    {
+        //move the main view, so that the keyboard does not hide it.
+        if  (self.view.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self setViewMovedUp:NO];}
+
+//method to move the view up/down whenever the keyboard is shown/dismissed
+-(void)setViewMovedUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    CGRect rect = self.view.frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
 }
 
 // to hide keyboard
