@@ -29,8 +29,10 @@
 
 
 - (IBAction)btnSaveServices:(id)sender;
+- (IBAction)selectPhoto:(UIButton *)sender;
 - (IBAction)takePhoto:  (UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIButton *takePhoto;
+@property (strong, nonatomic) IBOutlet UIButton *selectPhoto;
 
 
 

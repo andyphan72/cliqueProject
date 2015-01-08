@@ -38,8 +38,10 @@
 //@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnSaveEvent;
 
 - (IBAction)btnSaveEvent:(id)sender;
+- (IBAction)selectPhoto:(UIButton *)sender;
 - (IBAction)takePhoto:  (UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIButton *takePhoto;
+@property (strong, nonatomic) IBOutlet UIButton *selectPhoto;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *startDatePicker;
 @property (weak, nonatomic) IBOutlet UIScrollView *addEventView;

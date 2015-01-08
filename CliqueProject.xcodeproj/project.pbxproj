@@ -59,6 +59,8 @@
 		A16D3BFB1A5D36F500BD0D6D /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = A16D3BFA1A5D36F500BD0D6D /* location.png */; };
 		A16D3BFD1A5D370200BD0D6D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = A16D3BFC1A5D370200BD0D6D /* search.png */; };
 		A16D3BFF1A5D370B00BD0D6D /* today.gif in Resources */ = {isa = PBXBuildFile; fileRef = A16D3BFE1A5D370B00BD0D6D /* today.gif */; };
+		A16D3C021A5E2FF700BD0D6D /* folder_add.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A16D3C001A5E2FF700BD0D6D /* folder_add.jpeg */; };
+		A16D3C031A5E2FF700BD0D6D /* folder.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A16D3C011A5E2FF700BD0D6D /* folder.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +141,8 @@
 		A16D3BFA1A5D36F500BD0D6D /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = SOURCE_ROOT; };
 		A16D3BFC1A5D370200BD0D6D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = SOURCE_ROOT; };
 		A16D3BFE1A5D370B00BD0D6D /* today.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = today.gif; sourceTree = SOURCE_ROOT; };
+		A16D3C001A5E2FF700BD0D6D /* folder_add.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = folder_add.jpeg; sourceTree = SOURCE_ROOT; };
+		A16D3C011A5E2FF700BD0D6D /* folder.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = folder.jpeg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +257,8 @@
 		A12ADE671A51A69F00F98AB5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A16D3C001A5E2FF700BD0D6D /* folder_add.jpeg */,
+				A16D3C011A5E2FF700BD0D6D /* folder.jpeg */,
 				A16D3BFE1A5D370B00BD0D6D /* today.gif */,
 				A16D3BFC1A5D370200BD0D6D /* search.png */,
 				A16D3BFA1A5D36F500BD0D6D /* location.png */,
@@ -940,8 +946,10 @@
 				4EE9024A1964A28600AA3B42 /* Default@2x.png in Resources */,
 				4E00E29719659277007CA70B /* MainStoryboard-iPad.storyboard in Resources */,
 				4EE9023D1964A22200AA3B42 /* InfoPlist.strings in Resources */,
+				A16D3C031A5E2FF700BD0D6D /* folder.jpeg in Resources */,
 				A16D3BF41A5D319C00BD0D6D /* no_profile1.jpg in Resources */,
 				A12ADE691A51A6CE00F98AB5 /* doritos1.jpg in Resources */,
+				A16D3C021A5E2FF700BD0D6D /* folder_add.jpeg in Resources */,
 				A16D3BF51A5D319C00BD0D6D /* no_profile2.png in Resources */,
 				A16D3BFF1A5D370B00BD0D6D /* today.gif in Resources */,
 				A16D3BF91A5D36DB00BD0D6D /* friends.gif in Resources */,

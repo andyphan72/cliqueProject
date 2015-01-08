@@ -37,7 +37,6 @@
     
     [self.view endEditing:YES];
     
-    self.navigationController.navigationBarHidden = NO;
     
     obj = [DataClass getInstance];
     CompanyDetails = [[NSDictionary alloc] init];
@@ -47,6 +46,7 @@
     
     
     // setting navigation bar transparent
+    self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
                                                   forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -54,6 +54,7 @@
     self.navigationController.view.backgroundColor = [UIColor clearColor];
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
     
+    // setting date picker for start and end date
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     [datePicker addTarget:self action:@selector(updateTextField:)
@@ -149,7 +150,7 @@
 }
 
 
-
+//this is to select photo from camera roll of the event
 - (IBAction)selectPhoto:(UIButton *)sender {
     
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
