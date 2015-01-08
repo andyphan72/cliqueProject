@@ -124,7 +124,7 @@
     //This is to count the number of records in Products table
     FMDatabase *productdb = [FMDatabase databaseWithPath:dbPath];
     [productdb open];
-    FMResultSet *product1 = [servicesdb executeQuery:@"select count(*) as productcount from product where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+    FMResultSet *product1 = [productdb executeQuery:@"select count(*) as productcount from product where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
     while([product1 next]) {
         totalProductRecords = [product1 intForColumn:@"productcount"];
     }
