@@ -123,10 +123,6 @@
                                                            shadow, NSShadowAttributeName,
                                                            [UIFont fontWithName:@"System" size:21.0], NSFontAttributeName, nil]];
     
-    
-    
-    
-    
 }
 
 #pragma mark state preservation / restoration
@@ -242,48 +238,8 @@
         label2.textColor = [UIColor whiteColor];
         [cell.contentView addSubview:label2];
     
-    
-    
-//        //event
-//        [[cell.contentView viewWithTag:2002] removeFromSuperview ];
-//        NSString *eventlbl= @"Event :";
-//        CGRect frame2=CGRectMake(30,70, 200, 20);
-//        UILabel *label2=[[UILabel alloc]init];
-//        label2.frame=frame2;
-//        label2.text= eventlbl;
-//        label2.tag = 2002;
-//        label2.font = [UIFont fontWithName:@"TreBuchet MS" size:10];
-//        label2.textColor = [UIColor lightGrayColor];
-//        [cell.contentView addSubview:label2];
-//
-//        //Services
-//        [[cell.contentView viewWithTag:2003] removeFromSuperview ];
-//        NSString *serviceslbl= @"Services :";
-//        CGRect frame3=CGRectMake(80,70, 200, 20);
-//        UILabel *label3=[[UILabel alloc]init];
-//        label3.frame=frame3;
-//        label3.text= serviceslbl;
-//        label3.tag = 2003;
-//        label3.font = [UIFont fontWithName:@"TreBuchet MS" size:10];
-//        label3.textColor = [UIColor lightGrayColor];
-//        [cell.contentView addSubview:label3];
-//    
-//        //Services
-//        [[cell.contentView viewWithTag:2004] removeFromSuperview ];
-//        NSString *productslbl= @"Products :";
-//        CGRect frame4=CGRectMake(1500,70, 200, 20);
-//        UILabel *label4=[[UILabel alloc]init];
-//        label4.frame=frame4;
-//        label4.text= productslbl;
-//        label4.tag = 2004;
-//        label4.font = [UIFont fontWithName:@"TreBuchet MS" size:10];
-//        label4.textColor = [UIColor lightGrayColor];
-//        [cell.contentView addSubview:label4];
-
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
         
-//    }
-    
     return cell;
 }
 
@@ -332,8 +288,7 @@
     [self ReloadTableData];
     [self.businessTableView reloadData];
     
-    
-    
+
 }
 
 - (void) ReloadTableData

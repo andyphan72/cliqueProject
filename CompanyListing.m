@@ -76,8 +76,6 @@ NSArray *searchResults;
                 numberOfBusiness = [results2 stringForColumn:@"bCount"];
             }
         
-        
-        
         totalRecords = totalRecords +1;
         
         [_companyID addObject:companyID];
@@ -91,9 +89,6 @@ NSArray *searchResults;
     }
     [database close];
     [self.myTableView reloadData];
-    
-    
-
     
 }
 
@@ -441,16 +436,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
     return YES;
 }
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:@"showRecipeDetail"]) {
-//        NSIndexPath *indexPath = [self.myTableView indexPathForSelectedRow];
-//        CompanyView *destViewController = segue.destinationViewController;
-//        destViewController.recipeName = [_companyName objectAtIndex:indexPath.row];
-//    }
-//    
-//}
-
-
 // to pass data to view controller and call CompanyView controller
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -474,11 +459,6 @@ shouldReloadTableForSearchString:(NSString *)searchString
                               sender:[_companyName objectAtIndex:indexPath.row]];
     
 }
-
-
-
-
-
 
 @end
 

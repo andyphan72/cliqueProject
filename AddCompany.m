@@ -32,12 +32,7 @@
 
 
 @implementation AddCompany{
-    
-    
 }
-
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -62,9 +57,6 @@
     
     
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -132,9 +124,6 @@
                                                     message:@"New Company record saved.\n Now you can start adding business for this company." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
     
-    // To clear text fields
-    // [self clearTextfields];
-
     // Enable Add Business button
      [self enableAddBusinessBtn];
     

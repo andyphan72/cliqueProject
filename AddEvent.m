@@ -202,6 +202,7 @@
     
 }
 
+// update textfield with picker value
 -(void)updateTextField:(UIDatePicker *)sender
 {
 
@@ -215,11 +216,9 @@
     else if([self.txtEndDate isEditing]){
         self.txtEndDate.text = [dateFormat stringFromDate:sender.date];
     }
-
-
 }
 
-
+// to scroll view up when keyboard appear
 #define kOFFSET_FOR_KEYBOARD 170.0
 
 -(void)textFieldDidBeginEditing:(UITextField *)sender

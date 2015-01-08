@@ -33,9 +33,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *txtEndDate;
 @property (strong, nonatomic) IBOutlet UIImageView *imgEventPhoto;
 
-//@property (strong, nonatomic) IBOutlet UIButton *btnTakePhoto;
-
-//@property (strong, nonatomic) IBOutlet UIBarButtonItem *btnSaveEvent;
 
 - (IBAction)btnSaveEvent:(id)sender;
 - (IBAction)selectPhoto:(UIButton *)sender;

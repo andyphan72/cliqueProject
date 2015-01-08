@@ -45,14 +45,6 @@
 @synthesize photo2_taken;
 @synthesize photo3_taken;
 
-CGFloat animatedDistance;
-static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
-static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
-static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
-static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
-static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.locationManager = [[CLLocationManager alloc] init];
@@ -70,17 +62,14 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     _companylbl.text = [obj.companyData objectForKey:@"CompanyName"];
     _companyID = [obj.companyData objectForKey:@"CompanyID"];
     
-    // Time picker
-    self.pickerTime = [[UIPickerView alloc] init];
-    // Initialize Data
-    _timepickerCategoryData = @[@"8:00 AM", @"9:00 AM", @"10:00 AM", @"11:00 AM", @"12:00 PM", @"1:00 PM", @"2:00 PM", @"3:00 PM", @"4:00 PM", @"5:00 PM", @"6:00 PM", @"7:00 PM", @"9:00 PM", @"10:00 PM", @"11:00 PM", @"12:00 AM", @"1:00 AM", @"2:00 AM", @"3:00 AM", @"4:00 AM", @"5:00 AM", @"6:00 AM", @"7:00 AM"];
-    
-    // Connect data
-    self.pickerTime.dataSource = self;
-    self.pickerTime.delegate = self;
-    //    self.pickerCategory.hidden=YES;
-    _start_time.inputView = self.pickerTime;
-    _end_time.inputView = self.pickerTime;
+    // setting date picker for start and end date
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    datePicker.datePickerMode = UIDatePickerModeTime;
+    [datePicker addTarget:self action:@selector(updateTextField:)
+         forControlEvents:UIControlEventValueChanged];
+    [self.start_time setInputView:datePicker];
+    [self.end_time setInputView:datePicker];
+
     
     photo1_taken = @"No";
     photo2_taken = @"No";
@@ -154,8 +143,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         NSString *query2 = [NSString stringWithFormat:@"INSERT INTO business_photos ('seq', 'businessID', 'filename') VALUES('%@','%@','%@')",seq,businessID_str,photo_filename3];
         [database executeUpdate:query2];
     }
-    
-    
     
     
     // Display Alert message after saving into database.
@@ -258,12 +245,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
         NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
         if (error == nil && [placemarks count] > 0) {
             placemark = [placemarks lastObject];
-            self.txtMerchantAddress.text = [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
-                                      placemark.subThoroughfare, placemark.thoroughfare,
-                                      placemark.postalCode, placemark.locality,
-                                      placemark.administrativeArea,
-                                      placemark.country];
-            
             self.address_line1.text =placemark.subThoroughfare;
             self.address_line2.text =placemark.thoroughfare;
             self.address_postcode.text =placemark.postalCode;
@@ -278,28 +259,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
 }
 
-//- (void)requestAlwaysAuthorization
-//{
-//    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-//
-//    // If the status is denied or only granted for when in use, display an alert
-//    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
-//        NSString *title;
-//        title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
-//        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings";
-//
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-//                                                            message:message
-//                                                           delegate:self
-//                                                  cancelButtonTitle:@"Cancel"
-//                                                  otherButtonTitles:@"Settings", nil];
-//        [alertView show];
-//    }
-//    // The user has not enabled any location services. Request background authorization.
-//    else if (status == kCLAuthorizationStatusNotDetermined) {
-//        [self.locationManager requestAlwaysAuthorization];
-//    }
-//}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -502,40 +461,22 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
 }
 
-// The number of columns of data
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+// update textfield with picker value
+-(void)updateTextField:(UIDatePicker *)sender
 {
-    return 1;
-}
-
-// The number of rows of data
-- (int)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return _timepickerCategoryData.count;
-}
-
-// The data to return for the row and component (column) that's being passed in
-- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return _timepickerCategoryData[row];
-}
-
-// Catpure the picker view selection
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    // This method is triggered whenever the user makes a change to the picker selection.
-    // The parameter named row and component represents what was selected.
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"HH:mm"];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"Berlin"]];
     
     if ([self.start_time isEditing]) {
-        _start_time.text = _timepickerCategoryData[row];
+        self.start_time.text = [dateFormat stringFromDate:sender.date];
     }
-    else if ([self.end_time isEditing]){
-        _end_time.text = _timepickerCategoryData[row];
+    else if([self.end_time isEditing]){
+        self.end_time.text = [dateFormat stringFromDate:sender.date];
     }
-
+    
+    
 }
-
-
-
 
 @end

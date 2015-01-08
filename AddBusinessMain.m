@@ -32,10 +32,6 @@
     
 }
 
-
-
-
-
 //this is to hide the Status bar
 - (BOOL)prefersStatusBarHidden {return YES;}
 
