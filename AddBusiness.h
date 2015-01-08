@@ -57,6 +57,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *txtLatitude;
 @property (strong, nonatomic) IBOutlet UITextField *txtLongitude;
+@property (strong, nonatomic) IBOutlet UIScrollView *addBusinessView;
 
 // This is for getting Location
 @property (strong, nonatomic) CLLocationManager *locationManager;

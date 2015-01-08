@@ -86,6 +86,15 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     photo2_taken = @"No";
     photo3_taken = @"No";
     
+    //set textfield delefate for scrolling screen up when keyboard or picker appear. This will call the textFieldDidBeginEditing
+    self.address_state.delegate=self;
+    self.address_country.delegate=self;
+    self.address_location.delegate=self;
+    self.phone.delegate=self;
+    self.email.delegate=self;
+    self.start_time.delegate=self;
+    self.end_time.delegate=self;
+    
 }
 
 
@@ -307,73 +316,56 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self.mapView setRegion:[self.mapView regionThatFits:region] animated:YES];
 }
 
+
+// to scroll view up when keyboard appear
+#define kOFFSET_FOR_KEYBOARD 190.0
+
 //this is to move UIView up when keayboard appear
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.25];
-    self.view.frame = CGRectMake(0,-10,320,480);
-    [UIView commitAnimations];
     
-    CGRect textFieldRect = [self.view.window convertRect:textField.bounds fromView:textField];
-    CGRect viewRect = [self.view.window convertRect:self.view.bounds fromView:self.view];
-    
-    CGFloat midline = textFieldRect.origin.y + 0.5 * textFieldRect.size.height;
-    CGFloat numerator =
-    midline - viewRect.origin.y
-    - MINIMUM_SCROLL_FRACTION * viewRect.size.height;
-    CGFloat denominator =
-    (MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)
-    * viewRect.size.height;
-    CGFloat heightFraction = numerator / denominator;
-    
-    if (heightFraction < 0.0)
+    if ([textField isEqual:_address_state] || [textField isEqual:_address_country] || [textField isEqual:_address_location] || [textField isEqual:_phone] || [textField isEqual:_email] || [textField isEqual:_start_time] || [textField isEqual:_end_time])
     {
-        heightFraction = 0.0;
+        //move the main view, so that the keyboard does not hide it.
+        if  (self.view.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
     }
-    else if (heightFraction > 1.0)
-    {
-        heightFraction = 1.0;
-    }
-    
-    UIInterfaceOrientation orientation =
-    [[UIApplication sharedApplication] statusBarOrientation];
-    if (orientation == UIInterfaceOrientationPortrait ||
-        orientation == UIInterfaceOrientationPortraitUpsideDown)
-    {
-        animatedDistance = floor(PORTRAIT_KEYBOARD_HEIGHT * heightFraction);
-    }
-    else
-    {
-        animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
-    }
-    
-    CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y -= animatedDistance;
-    
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
-    
-    [self.view setFrame:viewFrame];
-    
-    [UIView commitAnimations];
     
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    CGRect viewFrame = self.view.frame;
-    viewFrame.origin.y += animatedDistance;
-    
+    [self setViewMovedUp:NO];
+
+}
+
+//method to move the view up/down whenever the keyboard is shown/dismissed
+-(void)setViewMovedUp:(BOOL)movedUp
+{
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     
-    [self.view setFrame:viewFrame];
+    CGRect rect = self.view.frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    self.view.frame = rect;
     
     [UIView commitAnimations];
 }
+
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
