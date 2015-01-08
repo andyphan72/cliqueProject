@@ -592,7 +592,7 @@
             <objects>
                 <viewController storyboardIdentifier="CompanyView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TWb-tR-zup" userLabel="Company View" customClass="CompanyView" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FWy-u8-YZg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="companylbl" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mp2-Oa-3U2">
@@ -687,11 +687,11 @@
             <objects>
                 <viewController storyboardIdentifier="BusinessView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AH3-qE-ed4" userLabel="Business View" customClass="BusinessView" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Kd-Wd-cV4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="28F-A9-rKP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yc3-gy-NB8">
@@ -1206,7 +1206,7 @@
             <objects>
                 <viewController storyboardIdentifier="AddBusinessView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ms8-UQ-tJo" userLabel="Add Business View" customClass="AddBusiness" sceneMemberID="viewController">
                     <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="omJ-Ni-SR4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="960"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="companylbl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OmC-Op-law">
@@ -1403,12 +1403,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" id="kmr-Qb-nm6">
-                                <rect key="frame" x="-1" y="783" width="321" height="105"/>
+                                <rect key="frame" x="-1" y="783" width="321" height="580"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HCN-LU-wBc">
-                                <rect key="frame" x="17" y="790" width="90" height="90"/>
+                                <rect key="frame" x="220" y="815" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Take Photo" image="photo1.png">
@@ -1419,12 +1419,19 @@
                                     <action selector="takePhoto:" destination="ms8-UQ-tJo" eventType="touchUpInside" id="gre-8R-FIv"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gNe-qd-YHl" userLabel="Select Photo">
+                                <rect key="frame" x="220" y="890" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="folder_add.jpeg">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="businessphoto1" id="D6m-Mc-Tz3">
-                                <rect key="frame" x="17" y="790" width="90" height="90"/>
+                                <rect key="frame" x="17" y="790" width="180" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WhP-2n-xWc">
-                                <rect key="frame" x="117" y="790" width="90" height="90"/>
+                                <rect key="frame" x="220" y="1005" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Take Photo" image="photo1.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1434,12 +1441,19 @@
                                     <action selector="takePhoto2:" destination="ms8-UQ-tJo" eventType="touchUpInside" id="BvW-6k-dQC"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="60o-qH-UxW" userLabel="Select Photo">
+                                <rect key="frame" x="220" y="1080" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="folder_add.jpeg">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="EQU-f6-d9e">
-                                <rect key="frame" x="117" y="790" width="90" height="90"/>
+                                <rect key="frame" x="17" y="978" width="180" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jNF-wW-UkV">
-                                <rect key="frame" x="217" y="790" width="90" height="90"/>
+                                <rect key="frame" x="220" y="1190" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Take Photo" image="photo1.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1449,13 +1463,20 @@
                                     <action selector="takePhoto3:" destination="ms8-UQ-tJo" eventType="touchUpInside" id="Swk-fz-ndc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6IL-tW-qeI" userLabel="Select Photo">
+                                <rect key="frame" x="220" y="1265" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="folder_add.jpeg">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1us-3a-dGO">
-                                <rect key="frame" x="217" y="790" width="90" height="90"/>
+                                <rect key="frame" x="17" y="1166" width="180" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="960"/>
+                        <inset key="contentInset" minX="0.0" minY="0.0" maxX="0.0" maxY="1400"/>
                         <connections>
                             <outlet property="delegate" destination="ms8-UQ-tJo" id="H29-0d-ttR"/>
                         </connections>
@@ -1477,7 +1498,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="960"/>
+                    <size key="freeformSize" width="320" height="1400"/>
                     <connections>
                         <outlet property="addBusinessView" destination="omJ-Ni-SR4" id="wYb-Ya-upX"/>
                         <outlet property="address_city" destination="bj8-fa-mJF" id="2dQ-hI-1n4"/>
@@ -1811,12 +1832,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8Cx-KQ-7u8"/>
-        <segue reference="qZB-mc-Yt2"/>
-        <segue reference="OE9-CE-qWx"/>
+        <segue reference="MCT-x5-FOR"/>
+        <segue reference="bla-Jd-Bu2"/>
+        <segue reference="xmp-qZ-3XF"/>
+        <segue reference="rmv-q8-QlB"/>
+        <segue reference="snf-xe-dOH"/>
         <segue reference="fqN-Vl-nvu"/>
         <segue reference="kUM-3N-GvE"/>
-        <segue reference="OfS-eo-7o7"/>
-        <segue reference="sAF-EB-hm3"/>
     </inferredMetricsTieBreakers>
 </document>
