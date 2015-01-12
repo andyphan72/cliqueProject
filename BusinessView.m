@@ -134,7 +134,13 @@
 }
 
 - (IBAction)btnEventView:(id)sender {
+
+    //To disable sideview button
+    _btnSideView.enabled = NO;
+    _btnSideViewRight.enabled = NO;
     
+    //To change sideview to transparent
+    self.sideDetailView.alpha = 0.0;
     
     if ([sender tag] == 1001) { // if event button is pressed
         
@@ -186,17 +192,46 @@
         
         _eventID = [[NSMutableArray alloc] init];
         _eventName = [[NSMutableArray alloc] init];
+        _eventDescription = [[NSMutableArray alloc] init];
+        _eventStartDate = [[NSMutableArray alloc] init];
+        _eventEndDate = [[NSMutableArray alloc] init];
+        _eventPhoto = [[NSMutableArray alloc] init];
+        _teventphoto = [[NSMutableArray alloc] init];
         
-        FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+        FMResultSet *results_event = [eventdatabase executeQuery:@"select * from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
         
         while([results_event next]) {
+
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"dd-MM-yyyy HH:mm"];
+            
             NSString *eventID = [results_event stringForColumn:@"eventID"];
             NSString *eventtitle = [results_event stringForColumn:@"event_title"];
+            NSString *eventdesc = [results_event stringForColumn:@"event_description"];
+            NSDate *eventstartDate =[results_event stringForColumn:@"date_time_start"];
+            NSDate *eventendDate = [results_event stringForColumn:@"date_time_end"];
+            
+            FMResultSet *results2 = [eventdatabase executeQuery:@"select eventID, filename from event_photos where eventID = ? and seq = 1",eventID];
+            totalEventPhotos = 0;
+            NSString *eventphoto;
+            while([results2 next]) {
+                eventphoto = [results2 stringForColumn:@"filename"];
+                totalEventPhotos = totalPhotos +1;
+            }
+            NSString *getTotal = [NSString stringWithFormat:@"%d",totalPhotos];
+            [_teventphoto addObject:getTotal];
+            if ([getTotal isEqualToString:@"0"]) {
+                eventphoto = @" ";
+            }
+            [_eventPhoto addObject:eventphoto];
             
             totalRecords = totalRecords +1;
             
             [_eventID addObject:eventID];
             [_eventName addObject:eventtitle];
+            [_eventDescription addObject:eventdesc];
+            [_eventStartDate addObject:eventstartDate];
+            [_eventEndDate addObject:eventendDate];
             
         }
         [eventdatabase close];
@@ -345,6 +380,13 @@
     }
     else if ([sender tag] == 1004) {
         
+        //To enable sideview button
+        _btnSideView.enabled = YES;
+        _btnSideViewRight.enabled = YES;
+        
+        //To change sideview to transparent
+        self.sideDetailView.alpha = 0.5;
+        
         _eventView.hidden = YES;
         _servicesView.hidden = YES;
         _productsView.hidden = YES;
@@ -405,17 +447,81 @@
     
     if ([EventScreen isEqualToString:@"Up"]) {
         
-        //Event Name
+
+        //Event Start Date - Date
+        [[cell.contentView viewWithTag:3001] removeFromSuperview ];
+        UIView *newView = [[UIView alloc] initWithFrame:CGRectMake(10,10,60,60)];
+        newView.backgroundColor=[UIColor colorWithRed: 180.0/255.0 green: 238.0/255.0 blue:180.0/255.0 alpha: 1.0];
+        newView.tag = 3001;
+        [cell.contentView addSubview:newView];
+        
+        //Event Start Date - Month
+        NSDate *now = [NSDate date];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM"];
+        NSString *month = [formatter stringFromDate:now];
+        [[cell.contentView viewWithTag:2011] removeFromSuperview ];
+        CGRect frame11=CGRectMake(10,11, 60, 30);
+        UILabel *label11=[[UILabel alloc]init];
+        label11.frame=frame11;
+        label11.text= month;
+        label11.tag = 2011;
+        label11.font = [UIFont fontWithName:@"Helvetica" size:17];
+        label11.textColor=[UIColor whiteColor];
+        label11.textAlignment = UITextAlignmentCenter;
+        [cell.contentView addSubview:label11];
+        
+        //Event Start Date - Date
         [[cell.contentView viewWithTag:2001] removeFromSuperview ];
-        NSString *event_name= [_eventName objectAtIndex:indexPath.row];
-        CGRect frame=CGRectMake(16,5, 250, 20);
+        NSString *event_date_start = [_eventStartDate objectAtIndex:indexPath.row];
+        NSString *event_date = [event_date_start substringToIndex:2];
+        CGRect frame=CGRectMake(10,33, 60, 30);
         UILabel *label1=[[UILabel alloc]init];
         label1.frame=frame;
-        label1.text= event_name;
+        label1.text= event_date;
         label1.tag = 2001;
-        label1.font = [UIFont fontWithName:@"Helvetica" size:14];
+        label1.font = [UIFont fontWithName:@"Helvetica" size:35];
+        label1.textColor=[UIColor whiteColor];
+        label1.textAlignment = UITextAlignmentCenter;
         [cell.contentView addSubview:label1];
-    
+        
+        
+        //Event Name
+        [[cell.contentView viewWithTag:2002] removeFromSuperview ];
+        NSString *event_name= [_eventName objectAtIndex:indexPath.row];
+        CGRect frame2=CGRectMake(80,12, 200, 20);
+        UILabel *label2=[[UILabel alloc]init];
+        label2.frame=frame2;
+        label2.text= event_name;
+        label2.tag = 2002;
+        label2.font = [UIFont fontWithName:@"Helvetica" size:16];
+        [cell.contentView addSubview:label2];
+
+        //Event Description
+        [[cell.contentView viewWithTag:2003] removeFromSuperview ];
+        NSString *event_desc= [_eventDescription objectAtIndex:indexPath.row];
+        CGRect frame3=CGRectMake(80,27, 200, 20);
+        UILabel *label3=[[UILabel alloc]init];
+        label3.frame=frame3;
+        label3.text= event_desc;
+        label3.tag = 2003;
+        label3.font = [UIFont fontWithName:@"Helvetica" size:12];
+        [cell.contentView addSubview:label3];
+        
+        //Show Event Start Date
+        NSString *eventStartDate = [_eventStartDate objectAtIndex:indexPath.row];
+        [[cell.contentView viewWithTag:2004] removeFromSuperview ];
+        CGRect frame4=CGRectMake(80,41, 100, 20);
+        UILabel *label4=[[UILabel alloc]init];
+        label4.frame=frame4;
+        label4.text= eventStartDate;
+        label4.tag = 2004;
+        label4.font = [UIFont fontWithName:@"Helvetica" size:12];
+        [cell.contentView addSubview:label4];
+        
+        
+        
+        
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     else if ([ServicesScreen isEqualToString:@"Up"]) {
@@ -539,6 +645,88 @@
     [self.myEventTableView reloadData];
 
     
+}
+
+- (IBAction)btnSideView:(id)sender {
+    
+        // animate move sideDetailView to left
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _sideDetailView.frame = CGRectMake(50,_sideDetailView.frame.origin.y,270,_sideDetailView.bounds.size.height);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+    
+        //uiview transition
+        self.sideDetailView.alpha = 0.5;
+        [UIView beginAnimations:@"flip" context:nil];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        [UIView setAnimationDuration:1.0f];
+        self.sideDetailView.alpha = 1.0;
+        [UIView commitAnimations];
+    
+    
+        CLLocationCoordinate2D location;
+        location.latitude =  3.071971;
+        location.longitude = 101.690212;
+    
+        // Add an annotation
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        point.coordinate = location;
+        point.title = [obj.companyData objectForKey:@"BusinessName"];
+        [_mapView addAnnotation:point];
+    
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (location, 1000, 1000);
+        [_mapView setRegion:region animated:YES];
+    
+    
+    
+//        //Load Event Table
+//        BOOL success;
+//        NSString *dbName = @"cliqueDB.rdb";
+//        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *documentsDir = [documentPaths objectAtIndex:0];
+//        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+//        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        success = [fileManager fileExistsAtPath:dbPath];
+//        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+//        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+//        
+//        FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
+//        [eventdatabase open];
+//        
+//        _eventID = [[NSMutableArray alloc] init];
+//        _eventName = [[NSMutableArray alloc] init];
+//        
+//        FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+//        
+//        while([results_event next]) {
+//            NSString *eventID = [results_event stringForColumn:@"eventID"];
+//            NSString *eventtitle = [results_event stringForColumn:@"event_title"];
+//            
+//            totalRecords = totalRecords +1;
+//            
+//            [_eventID addObject:eventID];
+//            [_eventName addObject:eventtitle];
+//            
+//        }
+//        [eventdatabase close];
+//        _myEventTableView.userInteractionEnabled = YES;
+//        [self.myEventTableView reloadData];
+
+}
+
+
+- (IBAction)btnSideViewRight:(id)sender {
+    
+        [UIView animateWithDuration:0.8f delay:0.1f options:UIViewAnimationCurveEaseInOut animations:^{
+            _sideDetailView.frame = CGRectMake(310,_sideDetailView.frame.origin.y,270,_sideDetailView.bounds.size.height);
+            
+        }completion:^(BOOL finished) {
+            NSLog(@"Animation is complete");
+        }];
+        self.sideDetailView.alpha = 0.5;
 }
 
 //this is to hide the Status bar

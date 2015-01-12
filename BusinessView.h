@@ -12,6 +12,7 @@
 #import "FMDatabase.h"
 #import "FMResultSet.h"
 #import "CompanyListing.h"
+#import <MapKit/MapKit.h>
 
 @interface BusinessView : UIViewController<UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate>{
     
@@ -22,6 +23,9 @@
     NSMutableArray *indexPaths;
     int totalRecords;
     int totalPhotos;
+    int totalEventPhotos;
+    int totalServicesPhotos;
+    int totalProductsPhotos;
     
     int totalEventRecords;
     int totalServicesRecords;
@@ -44,6 +48,11 @@
 // event
 @property (retain, nonatomic) NSMutableArray *eventID;
 @property (retain, nonatomic) NSMutableArray *eventName;
+@property (retain, nonatomic) NSMutableArray *eventDescription;
+@property (retain, nonatomic) NSMutableArray *eventStartDate;
+@property (retain, nonatomic) NSMutableArray *eventEndDate;
+@property (retain, nonatomic) NSMutableArray *eventPhoto;
+@property (retain, nonatomic) NSMutableArray *teventphoto;
 @property (strong, nonatomic) IBOutlet UITableView *myEventTableView;
 @property (nonatomic, weak) IBOutlet UILabel* myEventTableTitle;
 @property (strong, nonatomic) IBOutlet UILabel *eventCountlbl;
@@ -69,6 +78,10 @@
 @property (strong, nonatomic) IBOutlet UIView *productsView;
 @property (strong, nonatomic) IBOutlet UIButton *btnEventView;
 @property (strong, nonatomic) IBOutlet UIButton *btnServicesView;
+@property (strong, nonatomic) IBOutlet UIView *sideDetailView; 
+@property (strong, nonatomic) IBOutlet UIButton *btnSideView;
+@property (strong, nonatomic) IBOutlet UIButton *btnSideViewRight;
+@property (strong, nonatomic) IBOutlet MKMapView *mapView;
 
 // This is for Photo capturing
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
