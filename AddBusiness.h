@@ -85,6 +85,12 @@
 - (IBAction)takePhoto3:  (UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIButton *takePhoto3;
 
+@property (strong, nonatomic) IBOutlet UIButton *selectPhoto1;
+- (IBAction)selectPhoto1:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIButton *selectPhoto2;
+- (IBAction)selectPhoto2:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIButton *selectPhoto3;
+- (IBAction)selectPhoto3:(UIButton *)sender;
 
 
 @end

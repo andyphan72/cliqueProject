@@ -694,7 +694,7 @@
             <objects>
                 <viewController storyboardIdentifier="CompanyView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TWb-tR-zup" userLabel="Company View" customClass="CompanyView" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FWy-u8-YZg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="companylbl" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mp2-Oa-3U2">
@@ -789,11 +789,11 @@
             <objects>
                 <viewController storyboardIdentifier="BusinessView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AH3-qE-ed4" userLabel="Business View" customClass="BusinessView" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Kd-Wd-cV4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="28F-A9-rKP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="700"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yc3-gy-NB8">
@@ -1562,6 +1562,9 @@
                                 <state key="normal" image="folder_add.jpeg">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="selectPhoto1:" destination="ms8-UQ-tJo" eventType="touchUpInside" id="Gxn-t9-8bR"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="businessphoto1" id="D6m-Mc-Tz3">
                                 <rect key="frame" x="17" y="790" width="180" height="180"/>
@@ -1578,12 +1581,15 @@
                                     <action selector="takePhoto2:" destination="ms8-UQ-tJo" eventType="touchUpInside" id="BvW-6k-dQC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="60o-qH-UxW" userLabel="Select Photo">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="60o-qH-UxW" userLabel="Select Photo">
                                 <rect key="frame" x="220" y="1080" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="folder_add.jpeg">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="selectPhoto2:" destination="ms8-UQ-tJo" eventType="touchUpInside" id="3oU-K2-cIH"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="EQU-f6-d9e">
                                 <rect key="frame" x="17" y="978" width="180" height="180"/>
@@ -1600,12 +1606,15 @@
                                     <action selector="takePhoto3:" destination="ms8-UQ-tJo" eventType="touchUpInside" id="Swk-fz-ndc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6IL-tW-qeI" userLabel="Select Photo">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6IL-tW-qeI" userLabel="Select Photo">
                                 <rect key="frame" x="220" y="1265" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="folder_add.jpeg">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="selectPhoto3:" destination="ms8-UQ-tJo" eventType="touchUpInside" id="2Yn-sh-naE"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1us-3a-dGO">
                                 <rect key="frame" x="17" y="1166" width="180" height="180"/>
@@ -1653,6 +1662,9 @@
                         <outlet property="imageView2" destination="EQU-f6-d9e" id="9y2-GS-Gjy"/>
                         <outlet property="imageView3" destination="1us-3a-dGO" id="KEL-iQ-vSG"/>
                         <outlet property="phone" destination="13C-IW-reI" id="dsc-We-y59"/>
+                        <outlet property="selectPhoto1" destination="gNe-qd-YHl" id="0oA-gP-7eY"/>
+                        <outlet property="selectPhoto2" destination="60o-qH-UxW" id="KEj-MN-Vyo"/>
+                        <outlet property="selectPhoto3" destination="6IL-tW-qeI" id="gHJ-rQ-djV"/>
                         <outlet property="start_time" destination="ScK-iZ-X48" id="UVf-Ul-S1R"/>
                         <outlet property="takePhoto1" destination="HCN-LU-wBc" id="8rW-lM-bSf"/>
                         <outlet property="takePhoto2" destination="WhP-2n-xWc" id="Lhb-Ro-CjE"/>
@@ -1972,12 +1984,12 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="sAF-EB-hm3"/>
+        <segue reference="qZB-mc-Yt2"/>
         <segue reference="MCT-x5-FOR"/>
         <segue reference="OE9-CE-qWx"/>
-        <segue reference="qZB-mc-Yt2"/>
         <segue reference="fqN-Vl-nvu"/>
         <segue reference="kUM-3N-GvE"/>
-        <segue reference="rmv-q8-QlB"/>
-        <segue reference="sAF-EB-hm3"/>
+        <segue reference="OfS-eo-7o7"/>
     </inferredMetricsTieBreakers>
 </document>

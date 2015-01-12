@@ -370,17 +370,52 @@
     
 }
 
-- (IBAction)selectPhoto:(UIButton *)sender {
+//- (IBAction)selectPhoto:(UIButton *)sender {
+//    
+//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//    picker.delegate = self;
+//    picker.allowsEditing = YES;
+//    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    
+//    [self presentViewController:picker animated:YES completion:NULL];
+//    
+//    
+//}
+
+- (IBAction)selectPhoto1:(UIButton *)sender {
     
+    photoSeq = @"1";
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:NULL];
-    
-    
+
 }
+- (IBAction)selectPhoto2:(UIButton *)sender {
+    
+    photoSeq = @"2";
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+
+}
+- (IBAction)selectPhoto3:(UIButton *)sender {
+    
+    photoSeq = @"3";
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+
+}
+
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
@@ -394,6 +429,7 @@
         photo_filename1 = [[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_1.png"];
         photo1_taken = @"Yes";
         [_takePhoto2 setEnabled:YES];
+        [_selectPhoto2 setEnabled:YES];
         
     }
     else if ([photoSeq isEqualToString:@"2"])
@@ -405,6 +441,7 @@
         photo_filename2 = [[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_2.png"];
         photo2_taken = @"Yes";
         [_takePhoto3 setEnabled:YES];
+        [_selectPhoto3 setEnabled:YES];
         
     }
     else if ([photoSeq isEqualToString:@"3"])
