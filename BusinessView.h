@@ -86,4 +86,13 @@
 // This is for Photo capturing
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
+// Label for SideView
+@property (strong, nonatomic) IBOutlet UILabel *fullAddress;
+@property (strong, nonatomic) IBOutlet UILabel *likesLBL;
+@property (strong, nonatomic) IBOutlet UILabel *sharesLBL;
+@property (strong, nonatomic) IBOutlet UILabel *clicksLBL;
+@property (strong, nonatomic) IBOutlet UILabel *discussionLBL;
+@property (strong, nonatomic) IBOutlet NSString *ratingStar;
+
+
 @end

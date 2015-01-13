@@ -667,53 +667,81 @@
         [UIView commitAnimations];
     
     
-        CLLocationCoordinate2D location;
-        location.latitude =  3.071971;
-        location.longitude = 101.690212;
+//        CLLocationCoordinate2D location;
+//        location.latitude =  3.071971;
+//        location.longitude = 101.690212;
+//    
+//        // Add an annotation
+//        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+//        point.coordinate = location;
+//        point.title = [obj.companyData objectForKey:@"BusinessName"];
+//        [_mapView addAnnotation:point];
+//    
+//        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (location, 1000, 1000);
+//        [_mapView setRegion:region animated:YES];
     
-        // Add an annotation
-        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-        point.coordinate = location;
-        point.title = [obj.companyData objectForKey:@"BusinessName"];
-        [_mapView addAnnotation:point];
-    
-        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (location, 1000, 1000);
-        [_mapView setRegion:region animated:YES];
     
     
+        //Load Event Table
+        BOOL success;
+        NSString *dbName = @"cliqueDB.rdb";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDir = [documentPaths objectAtIndex:0];
+        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        success = [fileManager fileExistsAtPath:dbPath];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+        
+        FMDatabase *businessdatabase = [FMDatabase databaseWithPath:dbPath];
+        [businessdatabase open];
+        
     
-//        //Load Event Table
-//        BOOL success;
-//        NSString *dbName = @"cliqueDB.rdb";
-//        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *documentsDir = [documentPaths objectAtIndex:0];
-//        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
-//        NSFileManager *fileManager = [NSFileManager defaultManager];
-//        success = [fileManager fileExistsAtPath:dbPath];
-//        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
-//        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
-//        
-//        FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
-//        [eventdatabase open];
-//        
-//        _eventID = [[NSMutableArray alloc] init];
-//        _eventName = [[NSMutableArray alloc] init];
-//        
-//        FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
-//        
-//        while([results_event next]) {
-//            NSString *eventID = [results_event stringForColumn:@"eventID"];
-//            NSString *eventtitle = [results_event stringForColumn:@"event_title"];
-//            
-//            totalRecords = totalRecords +1;
-//            
-//            [_eventID addObject:eventID];
-//            [_eventName addObject:eventtitle];
-//            
-//        }
-//        [eventdatabase close];
-//        _myEventTableView.userInteractionEnabled = YES;
-//        [self.myEventTableView reloadData];
+        FMResultSet *results_business = [businessdatabase executeQuery:@"select * from company_business where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+
+        while([results_business next]) {
+            _fullAddress.text = [NSString stringWithFormat:@"%@, %@\n%@, %@\n%@, %@", [results_business stringForColumn:@"address_line1"],[results_business stringForColumn:@"address_line2"],[results_business stringForColumn:@"address_postcode"],[results_business stringForColumn:@"address_city"],[results_business stringForColumn:@"address_state"],[results_business stringForColumn:@"address_country"]];
+            
+            _likesLBL.text = [results_business stringForColumn:@"likes"];
+            _sharesLBL.text = [results_business stringForColumn:@"shares"];
+            _clicksLBL.text = [results_business stringForColumn:@"clicks"];
+            _ratingStar = [results_business stringForColumn:@"ratingStar"];
+            
+        }
+    
+    if ([_ratingStar isEqualToString:@"1"]) {
+        UIImageView *star1 =[[UIImageView alloc] initWithFrame:CGRectMake(50,3,20,20)];
+        star1.image=[UIImage imageNamed:@"gold-star.png"];
+        [self.sideDetailView addSubview:star1];
+    }
+    else if ([_ratingStar isEqualToString:@"2"]) {
+        UIImageView *star1 =[[UIImageView alloc] initWithFrame:CGRectMake(50,3,20,20)];
+        star1.image=[UIImage imageNamed:@"gold-star.png"];
+        [self.sideDetailView addSubview:star1];
+        
+        UIImageView *star2 =[[UIImageView alloc] initWithFrame:CGRectMake(75,3,20,20)];
+        star2.image=[UIImage imageNamed:@"gold-star.png"];
+        [self.sideDetailView addSubview:star2];
+
+    }
+    else if ([_ratingStar isEqualToString:@"3"]) {
+        UIImageView *star1 =[[UIImageView alloc] initWithFrame:CGRectMake(50,3,20,20)];
+        star1.image=[UIImage imageNamed:@"gold-star.png"];
+        [self.sideDetailView addSubview:star1];
+        
+        UIImageView *star2 =[[UIImageView alloc] initWithFrame:CGRectMake(75,3,20,20)];
+        star2.image=[UIImage imageNamed:@"gold-star.png"];
+        [self.sideDetailView addSubview:star2];
+
+        UIImageView *star3 =[[UIImageView alloc] initWithFrame:CGRectMake(100,3,20,20)];
+        star3.image=[UIImage imageNamed:@"gold-star.png"];
+        [self.sideDetailView addSubview:star3];
+        
+    }
+
+    
+    
+    [businessdatabase close];
 
 }
 
