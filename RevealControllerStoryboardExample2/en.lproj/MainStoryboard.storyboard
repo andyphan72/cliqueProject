@@ -1093,7 +1093,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view alpha="0.79999999999999982" contentMode="scaleToFill" id="4SS-Ax-ZH9" userLabel="View - Likes">
-                                        <rect key="frame" x="16" y="133" width="120" height="40"/>
+                                        <rect key="frame" x="10" y="139" width="120" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likes.gif" id="qLa-4b-O9e">
@@ -1111,7 +1111,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view alpha="0.79999999999999982" contentMode="scaleToFill" id="LW4-4b-uAr" userLabel="View - Shares">
-                                        <rect key="frame" x="138" y="133" width="120" height="40"/>
+                                        <rect key="frame" x="132" y="139" width="120" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share.gif" id="DkK-WF-zTo">
@@ -1129,7 +1129,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view alpha="0.79999999999999982" contentMode="scaleToFill" id="Mi1-Ji-JrP" userLabel="View - Clicks">
-                                        <rect key="frame" x="16" y="175" width="120" height="40"/>
+                                        <rect key="frame" x="10" y="181" width="120" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fingerprint.gif" id="mho-ag-BZV">
@@ -1147,7 +1147,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view alpha="0.79999999999999982" contentMode="scaleToFill" id="laB-ct-3Iq" userLabel="View - Discussion">
-                                        <rect key="frame" x="138" y="175" width="120" height="40"/>
+                                        <rect key="frame" x="132" y="181" width="120" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="discussion2.gif" id="W3b-WL-UZh">
@@ -1164,6 +1164,20 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="phoneLBL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N2S-uf-RHl">
+                                        <rect key="frame" x="10" y="89" width="150" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="emailLBL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d7j-OE-OCA">
+                                        <rect key="frame" x="10" y="110" width="150" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -1189,6 +1203,7 @@
                         <outlet property="clicksLBL" destination="UxA-Bg-abM" id="FeH-VJ-twf"/>
                         <outlet property="companylbl" destination="iN1-cY-dJY" id="YkH-aH-TWU"/>
                         <outlet property="discussionLBL" destination="hwL-DL-gaW" id="t9Y-O3-Ocl"/>
+                        <outlet property="emailLBL" destination="d7j-OE-OCA" id="fxX-WY-K2E"/>
                         <outlet property="eventCountlbl" destination="A1F-si-xS3" id="J3o-o4-ohc"/>
                         <outlet property="eventView" destination="zPj-vb-ykN" id="7h7-fi-vT1"/>
                         <outlet property="fullAddress" destination="jA4-eO-5fO" id="ROD-rI-cBh"/>
@@ -1198,6 +1213,7 @@
                         <outlet property="myEventTableView" destination="htz-zh-EWO" id="Ec8-Qy-Dwb"/>
                         <outlet property="myProductTableView" destination="RqA-hp-qlv" id="vA4-D8-hNp"/>
                         <outlet property="myServicesTableView" destination="msz-M7-PPL" id="NWh-i2-mOS"/>
+                        <outlet property="phoneLBL" destination="N2S-uf-RHl" id="xYg-6l-39n"/>
                         <outlet property="productCountlbl" destination="BEH-wn-sa3" id="yOz-3j-u9h"/>
                         <outlet property="productsView" destination="RME-Pp-Qjb" id="AAT-qI-RRb"/>
                         <outlet property="servicesCountlbl" destination="34r-tw-q2L" id="ysj-lI-ief"/>
