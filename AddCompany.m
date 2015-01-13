@@ -47,7 +47,7 @@
     // Category piker
     self.pickerCategory = [[UIPickerView alloc] init];
     // Initialize Data
-    _pickerCategoryData = @[@"Food", @"Entertainment", @"Social", @"Arts"];
+    _pickerCategoryData = @[@"Accomodation", @"Apparel & Accessories", @"Automotive", @"Baby & Toddler", @"Bakery", @"Beauty", @"Books & Magazine", @"Cafe & Lounge", @"Cameras", @"Cinema", @"Delivery & Take Away", @"Dentist", @"Eyewear & Optics", @"Fast Food", @"Financial Instituition", @"Fitness", @"Florist", @"Furniture", @"Gifts", @"Hair Salon", @"Handbags", @"Hardware", @"Household", @"Jewellery", @"Leisure", @"Luggage", @"Medical", @"Mobile & Gadgets", @"Music", @"Office Supplies", @"Outdoor", @"Pets", @"Pharmacy", @"Pubs & Nightclubs", @"Restaurants", @"Shoes", @"Toys & Hobbies", @"Watches"];
     
     // Connect data
     self.pickerCategory.dataSource = self;
@@ -174,6 +174,27 @@
         [alert show];
         return false;
     }
+    else if ([_txtCompanyCatergory.text isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"COMPANY"
+                                                        message:@"Company Category is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtCompanyCatergory becomeFirstResponder];
+        
+        [alert show];
+        return false;
+        
+    }
+    else if ([_txtCompanyDescription.text isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"COMPANY"
+                                                        message:@"Company Description is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtCompanyDescription becomeFirstResponder];
+        
+        [alert show];
+        return false;
+        
+    }
+    
+    
+    
     
     return true;
 }
