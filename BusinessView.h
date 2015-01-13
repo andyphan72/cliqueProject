@@ -93,6 +93,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *clicksLBL;
 @property (strong, nonatomic) IBOutlet UILabel *discussionLBL;
 @property (strong, nonatomic) IBOutlet NSString *ratingStar;
+@property (strong, nonatomic) IBOutlet UILabel *phoneLBL;
+@property (strong, nonatomic) IBOutlet UILabel *emailLBL;
 
 
 @end

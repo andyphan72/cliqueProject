@@ -702,9 +702,15 @@
         while([results_business next]) {
             _fullAddress.text = [NSString stringWithFormat:@"%@, %@\n%@, %@\n%@, %@", [results_business stringForColumn:@"address_line1"],[results_business stringForColumn:@"address_line2"],[results_business stringForColumn:@"address_postcode"],[results_business stringForColumn:@"address_city"],[results_business stringForColumn:@"address_state"],[results_business stringForColumn:@"address_country"]];
             
-            _likesLBL.text = [results_business stringForColumn:@"likes"];
-            _sharesLBL.text = [results_business stringForColumn:@"shares"];
-            _clicksLBL.text = [results_business stringForColumn:@"clicks"];
+            _phoneLBL.text = [results_business stringForColumn:@"contact_phone1"];
+            _emailLBL.text = [results_business stringForColumn:@"contact_email"];
+            
+            NSNumberFormatter *formatter = [NSNumberFormatter new];
+            [formatter setNumberStyle:NSNumberFormatterDecimalStyle]; // this line is important!
+            
+            _likesLBL.text = [formatter stringFromNumber:[NSNumber numberWithInteger:[results_business intForColumn:@"likes"]]];
+            _sharesLBL.text = [formatter stringFromNumber:[NSNumber numberWithInteger:[results_business intForColumn:@"shares"]]];
+            _clicksLBL.text = [formatter stringFromNumber:[NSNumber numberWithInteger:[results_business intForColumn:@"clicks"]]];
             _ratingStar = [results_business stringForColumn:@"ratingStar"];
             
         }
