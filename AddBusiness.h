@@ -44,6 +44,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *address_state;
 @property (strong, nonatomic) IBOutlet UITextField *address_country;
 @property (strong, nonatomic) IBOutlet UITextField *address_location;
+@property (strong, nonatomic) NSString *address_location_forDB;
 @property (strong, nonatomic) IBOutlet UITextField *start_time;
 @property (strong, nonatomic) IBOutlet UITextField *end_time;
 @property (strong, nonatomic) IBOutlet UITextField *phone;

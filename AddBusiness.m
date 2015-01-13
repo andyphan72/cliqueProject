@@ -115,7 +115,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     [database open];
     
-    NSString *query = [NSString stringWithFormat:@"INSERT INTO company_business ('businessname', 'address_line1', 'address_line2', 'address_postcode', 'address_city', 'address_state', 'address_country', 'contact_phone1', 'contact_email', 'companyID', 'location', 'business_start_time', 'business_end_time') VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",_businessName.text,_address_line1.text,_address_line2.text,_address_postcode.text,_address_city.text,_address_state.text,_address_country.text,_phone.text,_email.text,_companyID,_address_location.text,_start_time.text,_end_time.text];
+    NSString *query = [NSString stringWithFormat:@"INSERT INTO company_business ('businessname', 'address_line1', 'address_line2', 'address_postcode', 'address_city', 'address_state', 'address_country', 'contact_phone1', 'contact_email', 'companyID', 'location', 'business_start_time', 'business_end_time') VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",_businessName.text,_address_line1.text,_address_line2.text,_address_postcode.text,_address_city.text,_address_state.text,_address_country.text,_phone.text,_email.text,_companyID,_address_location_forDB,_start_time.text,_end_time.text];
     
     [database executeUpdate:query];
     
@@ -212,10 +212,35 @@
     NSLog(@" lat: %f",self.locationManager.location.coordinate.latitude);
     NSLog(@" lon: %f",self.locationManager.location.coordinate.longitude);
     
-    _address_location.text = [NSString stringWithFormat:@"%f ,%f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
+    _address_location_forDB = [NSString stringWithFormat:@"%f ,%f", self.locationManager.location.coordinate.latitude, self.locationManager.location.coordinate.longitude];
     
+    // This is to convert the latitude and longitude to coordinates for display
+    int latSeconds = abs(round(self.locationManager.location.coordinate.latitude * 3600));
+    int latDegrees = latSeconds / 3600;
+    latSeconds = ABS(latSeconds % 3600);
+    int latMinutes = latSeconds / 60;
+    latSeconds %= 60;
+    
+    int longSeconds = abs(round(self.locationManager.location.coordinate.longitude * 3600));
+    int longDegrees = longSeconds / 3600;
+    longSeconds = ABS(longSeconds % 3600);
+    int longMinutes = longSeconds / 60;
+    longSeconds %= 60;
+    
+    NSString* result = [NSString stringWithFormat:@"%d°%d'%d\"%@ %d°%d'%d\"%@",
+                        ABS(latDegrees),
+                        latMinutes,
+                        latSeconds,
+                        latDegrees >= 0 ? @"N" : @"S",
+                        ABS(longDegrees),
+                        longMinutes,
+                        longSeconds,
+                        longDegrees >= 0 ? @"E" : @"W"];
+    
+    _address_location.text = result;
     
     [self.locationManager stopUpdatingLocation];
+    
     
 }
 
@@ -370,17 +395,6 @@
     
 }
 
-//- (IBAction)selectPhoto:(UIButton *)sender {
-//    
-//    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-//    picker.delegate = self;
-//    picker.allowsEditing = YES;
-//    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//    
-//    [self presentViewController:picker animated:YES completion:NULL];
-//    
-//    
-//}
 
 - (IBAction)selectPhoto1:(UIButton *)sender {
     
@@ -491,12 +505,10 @@
     
 }
 
-
-
-- (IBAction)btnSavePhoto:(id)sender {
-    [self saveData];
-    
-}
+//- (IBAction)btnSavePhoto:(id)sender {
+//    [self saveData];
+//    
+//}
 
 // update textfield with picker value
 -(void)updateTextField:(UIDatePicker *)sender
