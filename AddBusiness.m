@@ -115,7 +115,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     [database open];
     
-    NSString *query = [NSString stringWithFormat:@"INSERT INTO company_business ('businessname', 'address_line1', 'address_line2', 'address_postcode', 'address_city', 'address_state', 'address_country', 'contact_phone1', 'contact_email', 'companyID', 'location', 'business_start_time', 'business_end_time','likes','shares','clicks','rating','ratingStar') VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%d','%d','%d','%d','%d')",_businessName.text,_address_line1.text,_address_line2.text,_address_postcode.text,_address_city.text,_address_state.text,_address_country.text,_phone.text,_email.text,_companyID,_address_location_forDB,_start_time.text,_end_time.text,0,0,0,0,0];
+    NSString *query = [NSString stringWithFormat:@"INSERT INTO company_business ('businessname', 'address_line1', 'address_line2', 'address_postcode', 'address_city', 'address_state', 'address_country', 'contact_phone1', 'contact_email', 'companyID', 'location', 'business_start_time', 'business_end_time','likes','shares','clicks','rating','ratingStar', 'verified') VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%d','%d','%d','%d','%d','%@')",_businessName.text,_address_line1.text,_address_line2.text,_address_postcode.text,_address_city.text,_address_state.text,_address_country.text,_phone.text,_email.text,_companyID,_address_location_forDB,_start_time.text,_end_time.text,0,0,0,0,0,@"No"];
     
     [database executeUpdate:query];
     
