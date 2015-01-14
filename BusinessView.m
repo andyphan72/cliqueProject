@@ -714,71 +714,289 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //add code here for when you hit delete
         
+        if ([EventScreen isEqualToString:@"Up"]) {
+            NSString *eventIDtoDelete= [_eventID objectAtIndex:indexPath.row];
+            
+            NSString *dbName = @"cliqueDB.rdb";
+            NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDir = [documentPaths objectAtIndex:0];
+            NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+            [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+            
+            FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
+            [eventdatabase open];
+            
+            FMResultSet *deleteEventPhoto = [eventdatabase executeQuery:@"select eventID, filename from event_photos where eventID = ? and seq = 1",eventIDtoDelete];
+            
+            while ([deleteEventPhoto next]) {
+                NSString *phototodelete = [deleteEventPhoto stringForColumn:@"filename"];
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                
+                NSString *filePath = [documentsPath stringByAppendingPathComponent:phototodelete];
+                NSError *error;
+                BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+                if (success) {
+                    //                UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                    //                [removeSuccessFulAlert show];
+                }
+                else
+                {
+                    NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                }
+            }
+            
+            
+            //remove records from event_photos table
+            [eventdatabase executeUpdate:@"Delete from event_photos where eventID = ?", eventIDtoDelete, nil];
+            
+            //remove records from event table
+            [eventdatabase executeUpdate:@"Delete from event where eventID = ?", eventIDtoDelete, nil];
+            
+            
+            [eventdatabase close];
+            
+            
+            // Display Alert message after saving into database.
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"EVENT "
+                                                            message:@"Event record deleted." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            
+            // reload tableview
+            [self ReloadTableData];
+            [self.myEventTableView reloadData];
+            
+            
+        }
+        else if ([ServicesScreen isEqualToString:@"Up"]) {
+            NSString *servicesIDtoDelete= [_servicesID objectAtIndex:indexPath.row];
+            
+            NSString *dbName = @"cliqueDB.rdb";
+            NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDir = [documentPaths objectAtIndex:0];
+            NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+            [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+            
+            FMDatabase *servicesdatabase = [FMDatabase databaseWithPath:dbPath];
+            [servicesdatabase open];
+            
+            FMResultSet *deleteServicesPhoto = [servicesdatabase executeQuery:@"select servicesID, filename from services_photos where servicesID = ? and seq = 1",servicesIDtoDelete];
+            
+            while ([deleteServicesPhoto next]) {
+                NSString *phototodelete = [deleteServicesPhoto stringForColumn:@"filename"];
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                
+                NSString *filePath = [documentsPath stringByAppendingPathComponent:phototodelete];
+                NSError *error;
+                BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+                if (success) {
+                    //                UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                    //                [removeSuccessFulAlert show];
+                }
+                else
+                {
+                    NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                }
+            }
+            
+            
+            //remove records from services_photos table
+            [servicesdatabase executeUpdate:@"Delete from services_photos where servicesID = ?", servicesIDtoDelete, nil];
+            
+            //remove records from services table
+            [servicesdatabase executeUpdate:@"Delete from services where servicesID = ?", servicesIDtoDelete, nil];
+            
+            [servicesdatabase close];
+            
+            
+            // Display Alert message after saving into database.
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SERVICES "
+                                                            message:@"Services record deleted." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            
+            // reload tableview
+            [self ReloadTableData];
+            [self.myServicesTableView reloadData];
+
+        }
+        else if ([ProductScreen isEqualToString:@"Up"]) {
+            NSString *productIDtoDelete= [_productID objectAtIndex:indexPath.row];
+            
+            NSString *dbName = @"cliqueDB.rdb";
+            NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDir = [documentPaths objectAtIndex:0];
+            NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+            [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+            
+            FMDatabase *productdatabase = [FMDatabase databaseWithPath:dbPath];
+            [productdatabase open];
+            
+            FMResultSet *deleteProductPhoto = [productdatabase executeQuery:@"select productID, filename from product_photos where productID = ? and seq = 1",productIDtoDelete];
+            
+            while ([deleteProductPhoto next]) {
+                NSString *phototodelete = [deleteProductPhoto stringForColumn:@"filename"];
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                
+                NSString *filePath = [documentsPath stringByAppendingPathComponent:phototodelete];
+                NSError *error;
+                BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+                if (success) {
+                    //                UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                    //                [removeSuccessFulAlert show];
+                }
+                else
+                {
+                    NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                }
+            }
+            
+            
+            //remove records from product_photos table
+            [productdatabase executeUpdate:@"Delete from product_photos where productID = ?", productIDtoDelete, nil];
+            
+            //remove records from product table
+            [productdatabase executeUpdate:@"Delete from product where productID = ?", productIDtoDelete, nil];
+            
+            [productdatabase close];
+            
+            
+            // Display Alert message after saving into database.
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PRODUCT "
+                                                            message:@"Product record deleted." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alert show];
+            
+            // reload tableview
+            [self ReloadTableData];
+            [self.myProductTableView reloadData];
+            
+        }
         
-        NSString *eventIDtoDelete= [_eventID objectAtIndex:indexPath.row];
-        
-        NSString *dbName = @"cliqueDB.rdb";
-        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDir = [documentPaths objectAtIndex:0];
-        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
-        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
-        
-        FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
-        [eventdatabase open];
-        
-        [eventdatabase executeUpdate:@"Delete from event where eventID = ?", eventIDtoDelete, nil];
-        [eventdatabase close];
-        
-        // Display Alert message after saving into database.
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"EVENT "
-                                                        message:@"Event record deleted." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
-        
-        
+
     }
     
-    // reload tableview
-    [self ReloadTableData];
-    [self.myEventTableView reloadData];
+
 }
 
 
 - (void) ReloadTableData
 {
-    totalRecords = 0;
-    //reload Event table
-    BOOL success;
-    NSString *dbName = @"cliqueDB.rdb";
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDir = [documentPaths objectAtIndex:0];
-    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    success = [fileManager fileExistsAtPath:dbPath];
-    NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
-    [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
     
-    FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
-    [eventdatabase open];
-    
-    _eventID = [[NSMutableArray alloc] init];
-    _eventName = [[NSMutableArray alloc] init];
-    
-    FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
-    
-    while([results_event next]) {
-        NSString *eventID = [results_event stringForColumn:@"eventID"];
-        NSString *eventtitle = [results_event stringForColumn:@"event_title"];
+    if ([EventScreen isEqualToString:@"Up"]) {
         
-        totalRecords = totalRecords +1;
+        totalRecords = 0;
+        //reload Event table
+        BOOL success;
+        NSString *dbName = @"cliqueDB.rdb";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDir = [documentPaths objectAtIndex:0];
+        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        success = [fileManager fileExistsAtPath:dbPath];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+    
+        FMDatabase *eventdatabase = [FMDatabase databaseWithPath:dbPath];
+        [eventdatabase open];
+    
+        _eventID = [[NSMutableArray alloc] init];
+        _eventName = [[NSMutableArray alloc] init];
         
-        [_eventID addObject:eventID];
-        [_eventName addObject:eventtitle];
+        FMResultSet *results_event = [eventdatabase executeQuery:@"select eventID, event_title from event where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+    
+        while([results_event next]) {
+            NSString *eventID = [results_event stringForColumn:@"eventID"];
+            NSString *eventtitle = [results_event stringForColumn:@"event_title"];
         
+            totalRecords = totalRecords +1;
+        
+            [_eventID addObject:eventID];
+            [_eventName addObject:eventtitle];
+        
+        }
+        [eventdatabase close];
+        [self.myEventTableView reloadData];
     }
-    [eventdatabase close];
-    [self.myEventTableView reloadData];
+    else if ([ServicesScreen isEqualToString:@"Up"]) {
+        
+        totalRecords = 0;
+        //reload Services table
+        BOOL success;
+        NSString *dbName = @"cliqueDB.rdb";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDir = [documentPaths objectAtIndex:0];
+        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        success = [fileManager fileExistsAtPath:dbPath];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+        
+        FMDatabase *servicesdatabase = [FMDatabase databaseWithPath:dbPath];
+        [servicesdatabase open];
+        
+        _servicesID = [[NSMutableArray alloc] init];
+        _servicesName = [[NSMutableArray alloc] init];
+        
+        FMResultSet *results_services = [servicesdatabase executeQuery:@"select servicesID, services_name from services where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+        
+        while([results_services next]) {
+            NSString *servicesID = [results_services stringForColumn:@"servicesID"];
+            NSString *servicesname = [results_services stringForColumn:@"services_name"];
+            
+            totalRecords = totalRecords +1;
+            
+            [_servicesID addObject:servicesID];
+            [_servicesName addObject:servicesname];
+            
+        }
+        [servicesdatabase close];
+        [self.myServicesTableView reloadData];
+    }
+    else if ([ProductScreen isEqualToString:@"Up"]) {
+        
+        totalRecords = 0;
+        //reload Product table
+        BOOL success;
+        NSString *dbName = @"cliqueDB.rdb";
+        NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDir = [documentPaths objectAtIndex:0];
+        NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        success = [fileManager fileExistsAtPath:dbPath];
+        NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+        [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+        
+        FMDatabase *productdatabase = [FMDatabase databaseWithPath:dbPath];
+        [productdatabase open];
+        
+        _productID = [[NSMutableArray alloc] init];
+        _productName = [[NSMutableArray alloc] init];
+        
+        FMResultSet *results_product = [productdatabase executeQuery:@"select productID, product_name from product where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+        
+        while([results_product next]) {
+            NSString *productID = [results_product stringForColumn:@"productID"];
+            NSString *productName = [results_product stringForColumn:@"product_name"];
+            
+            totalRecords = totalRecords +1;
+            
+            [_productID addObject:productID];
+            [_productName addObject:productName];
+            
+        }
+        [productdatabase close];
+        [self.myProductTableView reloadData];
+    }
 
     
 }
