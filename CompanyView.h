@@ -36,5 +36,6 @@
 @property (retain, nonatomic) NSMutableArray *businessName;
 @property (retain, nonatomic) NSMutableArray *businessphoto;
 @property (retain, nonatomic) NSMutableArray *tbusinessphoto;
+@property (retain, nonatomic) NSMutableArray *verifiedBusiness;
 
 @end

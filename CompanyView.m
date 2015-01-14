@@ -68,17 +68,20 @@
     _businessName = [[NSMutableArray alloc] init];
     _businessphoto = [[NSMutableArray alloc] init];
     _tbusinessphoto = [[NSMutableArray alloc] init];
+    _verifiedBusiness = [[NSMutableArray alloc] init];
     
-    FMResultSet *results = [database executeQuery:@"select businessID, businessname from company_business where companyID = ?",[obj.companyData objectForKey:@"CompanyID"]];
+    FMResultSet *results = [database executeQuery:@"select businessID, businessname, verified from company_business where companyID = ?",[obj.companyData objectForKey:@"CompanyID"]];
     
     while([results next]) {
         NSString *businessID = [results stringForColumn:@"businessID"];
         NSString *businessname = [results stringForColumn:@"businessname"];
+        NSString *verifiedpartner = [results stringForColumn:@"verified"];
         
         totalRecords = totalRecords +1;
         
         [_businessID addObject:businessID];
         [_businessName addObject:businessname];
+        [_verifiedBusiness addObject:verifiedpartner];
         
         FMResultSet *results2 = [database executeQuery:@"select businessID, filename from business_photos where businessID = ? and seq = 1",businessID];
         totalPhotos = 0;
@@ -204,6 +207,27 @@
         [cell.contentView addSubview:imgView];
         
     
+    }
+
+    if ([[_verifiedBusiness objectAtIndex:indexPath.row] isEqualToString:@"Yes"]) {
+        //add verified partner uiview
+        UIView *verifiedLabelview = [[UIView alloc] initWithFrame: CGRectMake ( 0, 20, 130, 20)];
+        verifiedLabelview.backgroundColor = [UIColor lightGrayColor];
+        verifiedLabelview.alpha = 0.7;
+        verifiedLabelview.opaque = NO;
+        [cell.contentView addSubview:verifiedLabelview];
+        
+        //verified partner label
+        [[cell.contentView viewWithTag:3001] removeFromSuperview ];
+        NSString *verified_label= @"Verified Partner";
+        CGRect frameV=CGRectMake(5, 22, 140, 16);
+        UILabel *labelV=[[UILabel alloc]init];
+        labelV.frame=frameV;
+        labelV.text= verified_label;
+        labelV.tag = 3001;
+        labelV.font = [UIFont fontWithName:@"TreBuchet MS" size:15];
+        labelV.textColor = [UIColor whiteColor];
+        [cell.contentView addSubview:labelV];
     }
     
         //add transparent uiview
@@ -343,6 +367,7 @@
 //    obj.companyData = [[NSMutableDictionary alloc]init];
     [obj.companyData setObject:[_businessID objectAtIndex:indexPath.row] forKey:@"BusinessID"];
     [obj.companyData setObject:[_businessName objectAtIndex:indexPath.row] forKey:@"BusinessName"];
+    [obj.companyData setObject:[_verifiedBusiness objectAtIndex:indexPath.row] forKey:@"VerifiedBusiness"];
     
     
     NSString *segueString = [NSString stringWithFormat:@"PushBusiness"];
