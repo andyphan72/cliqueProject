@@ -73,6 +73,7 @@
 		A1E3A2161A64CDB0004C04AC /* fingerprint.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1E3A2151A64CDB0004C04AC /* fingerprint.gif */; };
 		A1E3A2181A64D0A9004C04AC /* discussion.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E3A2171A64D0A9004C04AC /* discussion.png */; };
 		A1E3A21A1A64D11A004C04AC /* discussion2.gif in Resources */ = {isa = PBXBuildFile; fileRef = A1E3A2191A64D11A004C04AC /* discussion2.gif */; };
+		A1E3A21C1A661004004C04AC /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A1E3A21B1A661004004C04AC /* plus.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -168,6 +169,7 @@
 		A1E3A2151A64CDB0004C04AC /* fingerprint.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = fingerprint.gif; sourceTree = SOURCE_ROOT; };
 		A1E3A2171A64D0A9004C04AC /* discussion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discussion.png; sourceTree = SOURCE_ROOT; };
 		A1E3A2191A64D11A004C04AC /* discussion2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = discussion2.gif; sourceTree = SOURCE_ROOT; };
+		A1E3A21B1A661004004C04AC /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +285,7 @@
 		A12ADE671A51A69F00F98AB5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A1E3A21B1A661004004C04AC /* plus.png */,
 				A1E3A2191A64D11A004C04AC /* discussion2.gif */,
 				A1E3A2171A64D0A9004C04AC /* discussion.png */,
 				A1E3A2151A64CDB0004C04AC /* fingerprint.gif */,
@@ -978,6 +981,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A15F5BEA1A5A91AD00DEB448 /* no-image.png in Resources */,
+				A1E3A21C1A661004004C04AC /* plus.png in Resources */,
 				A1E3A2161A64CDB0004C04AC /* fingerprint.gif in Resources */,
 				4EE9024B1964A28600AA3B42 /* Default.png in Resources */,
 				4EE902461964A27600AA3B42 /* reveal-icon.png in Resources */,
@@ -1144,7 +1148,7 @@
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = CliqueProject;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1162,7 +1166,7 @@
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
 				PRODUCT_NAME = CliqueProject;
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

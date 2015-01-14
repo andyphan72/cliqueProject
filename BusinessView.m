@@ -77,6 +77,12 @@
         _imageView.image = [UIImage imageNamed:@"no-image.png"];
     }
     
+    if ([[obj.companyData objectForKey:@"VerifiedBusiness"] isEqualToString:@"Yes"]) {
+        //enable verified partner uiview
+        _verifiedPartnerView.hidden = NO;
+    }
+    
+
 //    CAGradientLayer *l = [CAGradientLayer layer];
 //    l.frame = _imageView.bounds;
 //    l.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil];
@@ -289,17 +295,35 @@
         
         _servicesID = [[NSMutableArray alloc] init];
         _servicesName = [[NSMutableArray alloc] init];
+        _servicesDescription = [[NSMutableArray alloc] init];
+        _servicesPhotos = [[NSMutableArray alloc] init];
         
-        FMResultSet *results_services = [servicesdatabase executeQuery:@"select servicesID, services_name from services where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+        FMResultSet *results_services = [servicesdatabase executeQuery:@"select servicesID, services_name, services_description from services where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
         
         while([results_services next]) {
             NSString *servicesID = [results_services stringForColumn:@"servicesID"];
             NSString *servicestitle = [results_services stringForColumn:@"services_name"];
+            NSString *servicesDesc = [results_services stringForColumn:@"services_description"];
             
             totalRecords = totalRecords +1;
             
             [_servicesID addObject:servicesID];
             [_servicesName addObject:servicestitle];
+            [_servicesDescription addObject:servicesDesc];
+            
+            FMResultSet *results2 = [servicesdatabase executeQuery:@"select servicesID, filename from services_photos where servicesID = ? and seq = 1",servicesID];
+            totalServicesPhotos = 0;
+            NSString *servicesPhoto;
+            while([results2 next]) {
+                servicesPhoto = [results2 stringForColumn:@"filename"];
+                totalServicesPhotos = totalServicesPhotos +1;
+            }
+            NSString *getTotal = [NSString stringWithFormat:@"%d",totalServicesPhotos];
+            if ([getTotal isEqualToString:@"0"]) {
+                servicesPhoto = @" ";
+            }
+            [_servicesPhotos addObject:servicesPhoto];
+            
             
         }
         [servicesdatabase close];
@@ -359,18 +383,34 @@
         
         _productID = [[NSMutableArray alloc] init];
         _productName = [[NSMutableArray alloc] init];
+        _productDescription = [[NSMutableArray alloc] init];
+        _productPhotos = [[NSMutableArray alloc] init];
         
-        FMResultSet *results_products = [productsdatabase executeQuery:@"select productID, product_name from product where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
+        FMResultSet *results_products = [productsdatabase executeQuery:@"select productID, product_name, product_description from product where businessID = ?",[obj.companyData objectForKey:@"BusinessID"]];
         
         while([results_products next]) {
             NSString *productID = [results_products stringForColumn:@"productID"];
             NSString *productname = [results_products stringForColumn:@"product_name"];
+            NSString *productdesc = [results_products stringForColumn:@"product_description"];
             
             totalRecords = totalRecords +1;
             
             [_productID addObject:productID];
             [_productName addObject:productname];
+            [_productDescription addObject:productdesc];
             
+            FMResultSet *results2 = [productsdatabase executeQuery:@"select productID, filename from product_photos where productID = ? and seq = 1",productID];
+            totalProductsPhotos = 0;
+            NSString *productphoto;
+            while([results2 next]) {
+                productphoto = [results2 stringForColumn:@"filename"];
+                totalProductsPhotos = totalProductsPhotos +1;
+            }
+            NSString *getTotal = [NSString stringWithFormat:@"%d",totalProductsPhotos];
+            if ([getTotal isEqualToString:@"0"]) {
+                productphoto = @" ";
+            }
+            [_productPhotos addObject:productphoto];
         }
         [productsdatabase close];
         [self.myProductTableView reloadData];
@@ -447,6 +487,29 @@
     
     if ([EventScreen isEqualToString:@"Up"]) {
         
+        
+        //to display event photos
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString* path = [documentsDirectory stringByAppendingPathComponent:[_eventPhoto objectAtIndex:indexPath.row]];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 180)];
+        imgView.image = [UIImage imageNamed:path];
+        //this is to add border to image
+        [imgView.layer setBorderColor: [[UIColor darkGrayColor] CGColor]];
+        [imgView.layer setBorderWidth: 1.0];
+        //this is show only center part of image
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        [cell.contentView addSubview:imgView];
+        
+        
+        //add transparent uiview
+        UIView *businesslblview = [[UIView alloc] initWithFrame: CGRectMake ( 0, 110, 320, 55)];
+        businesslblview.backgroundColor = [UIColor blackColor];
+        businesslblview.alpha = 0.3;
+        businesslblview.opaque = NO;
+        [cell.contentView addSubview:businesslblview];
+        
 
         //Event Start Date - Date
         [[cell.contentView viewWithTag:3001] removeFromSuperview ];
@@ -489,68 +552,141 @@
         //Event Name
         [[cell.contentView viewWithTag:2002] removeFromSuperview ];
         NSString *event_name= [_eventName objectAtIndex:indexPath.row];
-        CGRect frame2=CGRectMake(80,12, 200, 20);
+        CGRect frame2=CGRectMake(16,115, 200, 20);
         UILabel *label2=[[UILabel alloc]init];
         label2.frame=frame2;
         label2.text= event_name;
         label2.tag = 2002;
-        label2.font = [UIFont fontWithName:@"Helvetica" size:16];
+        label2.font = [UIFont fontWithName:@"Helvetica" size:20];
+        label2.textColor = [UIColor whiteColor];
         [cell.contentView addSubview:label2];
 
         //Event Description
         [[cell.contentView viewWithTag:2003] removeFromSuperview ];
         NSString *event_desc= [_eventDescription objectAtIndex:indexPath.row];
-        CGRect frame3=CGRectMake(80,27, 200, 20);
+        CGRect frame3=CGRectMake(16,132, 200, 20);
         UILabel *label3=[[UILabel alloc]init];
         label3.frame=frame3;
         label3.text= event_desc;
         label3.tag = 2003;
         label3.font = [UIFont fontWithName:@"Helvetica" size:12];
+        label3.textColor = [UIColor whiteColor];
         [cell.contentView addSubview:label3];
         
         //Show Event Start Date
         NSString *eventStartDate = [_eventStartDate objectAtIndex:indexPath.row];
         [[cell.contentView viewWithTag:2004] removeFromSuperview ];
-        CGRect frame4=CGRectMake(80,41, 100, 20);
+        CGRect frame4=CGRectMake(16,146, 100, 20);
         UILabel *label4=[[UILabel alloc]init];
         label4.frame=frame4;
         label4.text= eventStartDate;
         label4.tag = 2004;
         label4.font = [UIFont fontWithName:@"Helvetica" size:12];
+        label4.textColor = [UIColor whiteColor];
         [cell.contentView addSubview:label4];
-        
-        
-        
         
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     else if ([ServicesScreen isEqualToString:@"Up"]) {
         
+        //to display services photos
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString* path = [documentsDirectory stringByAppendingPathComponent:[_servicesPhotos objectAtIndex:indexPath.row]];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 180)];
+        imgView.image = [UIImage imageNamed:path];
+        //this is to add border to image
+        [imgView.layer setBorderColor: [[UIColor darkGrayColor] CGColor]];
+        [imgView.layer setBorderWidth: 1.0];
+        //this is show only center part of image
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        [cell.contentView addSubview:imgView];
+        
+        
+        //add transparent uiview
+        UIView *businesslblview = [[UIView alloc] initWithFrame: CGRectMake ( 0, 115, 320, 50)];
+        businesslblview.backgroundColor = [UIColor blackColor];
+        businesslblview.alpha = 0.3;
+        businesslblview.opaque = NO;
+        [cell.contentView addSubview:businesslblview];
+        
         //Services Name
         [[cell.contentView viewWithTag:2001] removeFromSuperview ];
         NSString *services_name= [_servicesName objectAtIndex:indexPath.row];
-        CGRect frame=CGRectMake(16,5, 250, 20);
+        CGRect frame=CGRectMake(16,120, 250, 20);
         UILabel *label1=[[UILabel alloc]init];
         label1.frame=frame;
         label1.text= services_name;
         label1.tag = 2001;
-        label1.font = [UIFont fontWithName:@"Helvetica" size:14];
+        label1.font = [UIFont fontWithName:@"Helvetica" size:20];
+        label1.textColor = [UIColor whiteColor];
         [cell.contentView addSubview:label1];
+
+        //Services Description
+        [[cell.contentView viewWithTag:2002] removeFromSuperview ];
+        NSString *services_desc= [_servicesDescription objectAtIndex:indexPath.row];
+        CGRect frame2=CGRectMake(16,135, 250, 20);
+        UILabel *label2=[[UILabel alloc]init];
+        label2.frame=frame2;
+        label2.text= services_desc;
+        label2.tag = 2002;
+        label2.font = [UIFont fontWithName:@"Helvetica" size:12];
+        label2.textColor = [UIColor whiteColor];
+        [cell.contentView addSubview:label2];
         
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     else if ([ProductScreen isEqualToString:@"Up"]) {
         
+        //to display business photos
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString* path = [documentsDirectory stringByAppendingPathComponent:[_productPhotos objectAtIndex:indexPath.row]];
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 180)];
+        imgView.image = [UIImage imageNamed:path];
+        //this is to add border to image
+        [imgView.layer setBorderColor: [[UIColor darkGrayColor] CGColor]];
+        [imgView.layer setBorderWidth: 1.0];
+        //this is show only center part of image
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
+        [cell.contentView addSubview:imgView];
+        
+        
+        //add transparent uiview
+        UIView *businesslblview = [[UIView alloc] initWithFrame: CGRectMake ( 0, 115, 320, 50)];
+        businesslblview.backgroundColor = [UIColor blackColor];
+        businesslblview.alpha = 0.3;
+        businesslblview.opaque = NO;
+        [cell.contentView addSubview:businesslblview];
+
         //Product Name
         [[cell.contentView viewWithTag:2001] removeFromSuperview ];
         NSString *products_name= [_productName objectAtIndex:indexPath.row];
-        CGRect frame=CGRectMake(16,5, 250, 20);
+        CGRect frame=CGRectMake(16,120, 250, 20);
         UILabel *label1=[[UILabel alloc]init];
         label1.frame=frame;
         label1.text= products_name;
         label1.tag = 2001;
-        label1.font = [UIFont fontWithName:@"Helvetica" size:14];
+        label1.font = [UIFont fontWithName:@"Helvetica" size:20];
+        label1.textColor = [UIColor whiteColor];
         [cell.contentView addSubview:label1];
+
+        //Product Description
+        [[cell.contentView viewWithTag:2002] removeFromSuperview ];
+        NSString *products_desc= [_productDescription objectAtIndex:indexPath.row];
+        CGRect frame2=CGRectMake(16,135, 250, 20);
+        UILabel *label2=[[UILabel alloc]init];
+        label2.frame=frame2;
+        label2.text= products_name;
+        label2.tag = 2002;
+        label2.font = [UIFont fontWithName:@"Helvetica" size:12];
+        label2.textColor = [UIColor whiteColor];
+        [cell.contentView addSubview:label2];
+        
+        
+        
         
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }

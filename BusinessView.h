@@ -60,12 +60,16 @@
 // services
 @property (retain, nonatomic) NSMutableArray *servicesID;
 @property (retain, nonatomic) NSMutableArray *servicesName;
+@property (retain, nonatomic) NSMutableArray *servicesDescription;
+@property (retain, nonatomic) NSMutableArray *servicesPhotos;
 @property (strong, nonatomic) IBOutlet UITableView *myServicesTableView;
 @property (strong, nonatomic) IBOutlet UILabel *servicesCountlbl;
 
-// producrs
+// products
 @property (retain, nonatomic) NSMutableArray *productID;
 @property (retain, nonatomic) NSMutableArray *productName;
+@property (retain, nonatomic) NSMutableArray *productDescription;
+@property (retain, nonatomic) NSMutableArray *productPhotos;
 @property (strong, nonatomic) IBOutlet UITableView *myProductTableView;
 @property (strong, nonatomic) IBOutlet UILabel *productCountlbl;
 
@@ -96,5 +100,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneLBL;
 @property (strong, nonatomic) IBOutlet UILabel *emailLBL;
 
+@property (strong, nonatomic) IBOutlet UIView *verifiedPartnerView;
 
 @end
