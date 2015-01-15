@@ -287,6 +287,9 @@
         
         
         NSString *businessIDtoDelete= [_businessID objectAtIndex:indexPath.row];
+        NSString *eventIDtoDelete;
+        NSString *servicesIDtoDelete;
+        NSString *productIDtoDelete;
         
         NSString *dbName = @"cliqueDB.rdb";
         NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -299,6 +302,146 @@
         FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
         [database open];
         
+        //Get EventID
+        FMResultSet *getEvenID = [database executeQuery:@"select eventID from event where businessID = ?",businessIDtoDelete];
+        
+        //Remove event photos
+        while ([getEvenID next]) {
+            eventIDtoDelete = [getEvenID stringForColumn:@"eventID"];
+            
+            FMResultSet *deleteEventPhoto = [database executeQuery:@"select eventID, filename from event_photos where eventID = ? and seq = 1",eventIDtoDelete];
+            
+            while ([deleteEventPhoto next]) {
+                NSString *phototodelete = [deleteEventPhoto stringForColumn:@"filename"];
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                
+                NSString *filePath = [documentsPath stringByAppendingPathComponent:phototodelete];
+                NSError *error;
+                BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+                if (success) {
+                    //                UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                    //                [removeSuccessFulAlert show];
+                }
+                else
+                {
+                    NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                }
+            }
+            
+            
+            //remove records from event_photos table
+            [database executeUpdate:@"Delete from event_photos where eventID = ?", eventIDtoDelete, nil];
+            
+        }
+        
+        
+        //Get servicesID
+        FMResultSet *getServicesID = [database executeQuery:@"select servicesID from services where businessID = ?",businessIDtoDelete];
+        
+        //Remove services photos
+        while ([getServicesID next]) {
+            servicesIDtoDelete = [getServicesID stringForColumn:@"servicesID"];
+            
+            FMResultSet *deleteServicesPhoto = [database executeQuery:@"select servicesID, filename from services_photos where servicesID = ? and seq = 1",servicesIDtoDelete];
+            
+            while ([deleteServicesPhoto next]) {
+                NSString *phototodelete = [deleteServicesPhoto stringForColumn:@"filename"];
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                
+                NSString *filePath = [documentsPath stringByAppendingPathComponent:phototodelete];
+                NSError *error;
+                BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+                if (success) {
+                    //                UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                    //                [removeSuccessFulAlert show];
+                }
+                else
+                {
+                    NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                }
+            }
+            
+            
+            //remove records from services_photos table
+            [database executeUpdate:@"Delete from services_photos where servicesID = ?", servicesIDtoDelete, nil];
+            
+        }
+        
+        
+        //Get productID
+        FMResultSet *getProductID = [database executeQuery:@"select productID from product where businessID = ?",businessIDtoDelete];
+        
+        //Remove product photos
+        while ([getProductID next]) {
+            productIDtoDelete = [getProductID stringForColumn:@"productID"];
+            
+            FMResultSet *deleteProductPhoto = [database executeQuery:@"select productID, filename from product_photos where productID = ? and seq = 1",productIDtoDelete];
+            
+            while ([deleteProductPhoto next]) {
+                NSString *phototodelete = [deleteProductPhoto stringForColumn:@"filename"];
+                
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                
+                NSString *filePath = [documentsPath stringByAppendingPathComponent:phototodelete];
+                NSError *error;
+                BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+                if (success) {
+                    //                UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                    //                [removeSuccessFulAlert show];
+                }
+                else
+                {
+                    NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+                }
+            }
+            
+            
+            //remove records from product_photos table
+            [database executeUpdate:@"Delete from product_photos where productID = ?", productIDtoDelete, nil];
+            
+        }
+        
+        
+        //remove records from event table
+        [database executeUpdate:@"Delete from event where businessID = ?", businessIDtoDelete, nil];
+        
+        //remove records from services table
+        [database executeUpdate:@"Delete from services where businessID = ?", businessIDtoDelete, nil];
+        
+        //remove records from product table
+        [database executeUpdate:@"Delete from product where businessID = ?", businessIDtoDelete, nil];
+        
+        //remove business photos from folder
+        FMResultSet *deleteBusinessPhoto = [database executeQuery:@"select businessID, filename from business_photos where businessID = ? and seq = 1",businessIDtoDelete];
+        
+        while ([deleteBusinessPhoto next]) {
+            NSString *phototodelete = [deleteBusinessPhoto stringForColumn:@"filename"];
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            
+            NSString *filePath = [documentsPath stringByAppendingPathComponent:phototodelete];
+            NSError *error;
+            BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+            if (success) {
+                //                UIAlertView *removeSuccessFulAlert=[[UIAlertView alloc]initWithTitle:@"Congratulation:" message:@"Successfully removed" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+                //                [removeSuccessFulAlert show];
+            }
+            else
+            {
+                NSLog(@"Could not delete file -:%@ ",[error localizedDescription]);
+            }
+        }
+        
+        //remove records from business_photos table
+        [database executeUpdate:@"Delete from business_photos where businessID = ?", businessIDtoDelete, nil];
+        
+        //remove records from company_business table
         [database executeUpdate:@"Delete from company_business where businessID = ?", businessIDtoDelete, nil];
         
         // Display Alert message after saving into database.
