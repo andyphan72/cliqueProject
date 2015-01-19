@@ -417,7 +417,7 @@
         [database executeUpdate:@"Delete from product where businessID = ?", businessIDtoDelete, nil];
         
         //remove business photos from folder
-        FMResultSet *deleteBusinessPhoto = [database executeQuery:@"select businessID, filename from business_photos where businessID = ? and seq = 1",businessIDtoDelete];
+        FMResultSet *deleteBusinessPhoto = [database executeQuery:@"select businessID, filename from business_photos where businessID = ?",businessIDtoDelete];
         
         while ([deleteBusinessPhoto next]) {
             NSString *phototodelete = [deleteBusinessPhoto stringForColumn:@"filename"];
