@@ -17,6 +17,7 @@
     NSDictionary *CompanyDetails;
     NSString *photo_filename;
     int productID;
+    int photoID;    
     
 }
 

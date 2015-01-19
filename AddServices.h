@@ -17,6 +17,8 @@
     NSDictionary *CompanyDetails;
     NSString *photo_filename;
     int servicesID;
+    int photoID;
+    
     
 }
 

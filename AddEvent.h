@@ -21,6 +21,8 @@
     CGPoint textFieldPoint;
     UITextField *curentlyBeingEditingTextField;
     
+    int photoID;    
+    
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *businessNamelbl;

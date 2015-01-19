@@ -435,12 +435,35 @@
 
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
 
+    BOOL success;
+    NSString *dbName = @"cliqueDB.rdb";
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDir = [documentPaths objectAtIndex:0];
+    NSString *dbPath = [documentsDir   stringByAppendingPathComponent:dbName];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    success = [fileManager fileExistsAtPath:dbPath];
+    NSString *databasePathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbName];
+    [fileManager copyItemAtPath:databasePathFromApp toPath:dbPath error:nil];
+    FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
+    [database open];
+
+    NSString *query = [NSString stringWithFormat:@"INSERT INTO photoID ('type') VALUES('%@')",@"Business"];
+    
+    [database executeUpdate:query];
+
+    FMResultSet *resultsPhotoName = [database executeQuery:@"select * from photoID order by photoID"];
+    photoID = 0;
+    while([resultsPhotoName next]) {
+        photoID = [resultsPhotoName intForColumn:@"photoID"];
+    }
+    
     if ([photoSeq isEqualToString:@"1"]) {
         self.imageView1.image = chosenImage;
         // saving image to Document folder
-        NSString *fname1 = [NSString stringWithFormat:@"%@_1",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        NSString *strFromInt = [NSString stringWithFormat:@"%d",photoID];
+        NSString *fname1 = [NSString stringWithFormat:@"%@_business_1",[strFromInt stringByReplacingOccurrencesOfString:@" " withString:@""]];
         [self saveImage:self.imageView1.image forPerson:fname1];
-        photo_filename1 = [[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_1.png"];
+        photo_filename1 = [[strFromInt stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_business_1.png"];
         photo1_taken = @"Yes";
         [_takePhoto2 setEnabled:YES];
         [_selectPhoto2 setEnabled:YES];
@@ -450,9 +473,10 @@
     {
         self.imageView2.image = chosenImage;
         // saving image to Document folder
-        NSString *fname2 = [NSString stringWithFormat:@"%@_2",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        NSString *strFromInt = [NSString stringWithFormat:@"%d",photoID];
+        NSString *fname2 = [NSString stringWithFormat:@"%@_business_2",[strFromInt stringByReplacingOccurrencesOfString:@" " withString:@""]];
         [self saveImage:self.imageView2.image forPerson:fname2];
-        photo_filename2 = [[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_2.png"];
+        photo_filename2 = [[strFromInt stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_business_2.png"];
         photo2_taken = @"Yes";
         [_takePhoto3 setEnabled:YES];
         [_selectPhoto3 setEnabled:YES];
@@ -462,10 +486,11 @@
     {
         self.imageView3.image = chosenImage;
         // saving image to Document folder
-        NSString *fname3 = [NSString stringWithFormat:@"%@_3",[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""]];
+        NSString *strFromInt = [NSString stringWithFormat:@"%d",photoID];
+        NSString *fname3 = [NSString stringWithFormat:@"%@_business_3",[strFromInt stringByReplacingOccurrencesOfString:@" " withString:@""]];
         [self saveImage:self.imageView3.image forPerson:fname3];
-        photo_filename3 = [[_businessName.text stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_3.png"];
-        photo1_taken = @"Yes";
+        photo_filename3 = [[strFromInt stringByReplacingOccurrencesOfString:@" " withString:@""] stringByAppendingString:@"_business_3.png"];
+        photo3_taken = @"Yes";
         
     }
         

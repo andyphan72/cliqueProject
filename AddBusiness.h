@@ -31,6 +31,7 @@
     CGPoint svos;
     
     int businessID;
+    int photoID;
     
 }
 
