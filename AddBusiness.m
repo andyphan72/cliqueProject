@@ -180,6 +180,79 @@
         [alert show];
         return false;
     }
+    else if([[_address_line1.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Business Address is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_address_line1 becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_address_postcode.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Business Postcode is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_address_postcode becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_address_city.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Business City is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_address_city becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_address_state.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Business State is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_address_state becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_address_country.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Business Country is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_address_country becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_phone.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Business Phone is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_phone becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_email.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Business Email is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_email becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_start_time.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Operation Hours - Start Time is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_start_time becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_end_time.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BUSINESS"
+                                                        message:@"Operation Hours - End Time is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_end_time becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    
     
     return true;
 }

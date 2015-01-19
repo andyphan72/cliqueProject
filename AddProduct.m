@@ -76,6 +76,22 @@
         [alert show];
         return false;
     }
+    else if([[_txtProductLabel.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PRODUCT"
+                                                        message:@"Product Label is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtProductLabel becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_txtProductDescription.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PRODUCT"
+                                                        message:@"Product Description is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtProductDescription becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
     
     return true;
 }

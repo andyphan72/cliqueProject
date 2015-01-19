@@ -93,6 +93,39 @@
         [alert show];
         return false;
     }
+    else if([[_txtEventDescription.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"EVENT"
+                                                        message:@"Event Description is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtEventDescription becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_txtEventVenue.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"EVENT"
+                                                        message:@"Event Venue is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtEventVenue becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_txtStartDate.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"EVENT"
+                                                        message:@"Event Start Date is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtStartDate becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_txtEndDate.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"EVENT"
+                                                        message:@"Event End Date is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtEndDate becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    
     
     return true;
 }

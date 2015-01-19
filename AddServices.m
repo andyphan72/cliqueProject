@@ -72,9 +72,25 @@
 - (bool) Validation{
     
     if([[_txtServicesName.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"EVENT"
-                                                        message:@"Event Title is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SERVICES"
+                                                        message:@"Services Name is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [_txtServicesName becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_txtServicesLabel.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SERVICES"
+                                                        message:@"Services Label is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtServicesLabel becomeFirstResponder];
+        
+        [alert show];
+        return false;
+    }
+    else if([[_txtServicesDescription.text stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"SERVICES"
+                                                        message:@"Services Description is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_txtServicesDescription becomeFirstResponder];
         
         [alert show];
         return false;
