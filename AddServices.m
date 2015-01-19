@@ -38,6 +38,11 @@
     
     self.navigationController.navigationBarHidden = NO;
     
+    //for textview border
+    CGRect frameRect = _txtServicesDescDummy.frame;
+    frameRect.size.height = 92;
+    _txtServicesDescDummy.frame = frameRect;
+    
     obj = [DataClass getInstance];
     CompanyDetails = [[NSDictionary alloc] init];
     obj = [DataClass getInstance];

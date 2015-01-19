@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *txtCompanyDescription;
 @property (strong, nonatomic) IBOutlet UIButton *btnCategoryList;
 @property (strong, nonatomic) IBOutlet UIButton *btnAddBusiness;
+@property (strong, nonatomic) IBOutlet UITextField *txtCompanyDescDummy;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *pickerCategory;
 

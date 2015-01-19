@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *txtProductLabel;
 @property (strong, nonatomic) IBOutlet UITextView *txtProductDescription;
 @property (strong, nonatomic) IBOutlet UIImageView *imgProductPhoto;
+@property (strong, nonatomic) IBOutlet UITextField *txtProductDescDummy;
 
 
 - (IBAction)btnSaveProduct:(id)sender;

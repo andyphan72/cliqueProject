@@ -37,6 +37,11 @@
     
     [self.view endEditing:YES];
     
+    //for textview border
+    CGRect frameRect = _txtEventDescDummy.frame;
+    frameRect.size.height = 92;
+    _txtEventDescDummy.frame = frameRect;
+    
     
     obj = [DataClass getInstance];
     CompanyDetails = [[NSDictionary alloc] init];

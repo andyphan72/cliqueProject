@@ -32,6 +32,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *txtStartDate;
 @property (strong, nonatomic) IBOutlet UITextField *txtEndDate;
 @property (strong, nonatomic) IBOutlet UIImageView *imgEventPhoto;
+@property (strong, nonatomic) IBOutlet UITextField *txtEventDescDummy;
 
 
 - (IBAction)btnSaveEvent:(id)sender;

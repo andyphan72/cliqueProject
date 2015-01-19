@@ -73,39 +73,39 @@
     
 }
 
-#pragma mark state preservation / restoration
-
-- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    // Save what you need here
-//    [coder encodeObject: _text forKey: @"text"];
-//    [coder encodeObject: _color forKey: @"color"];
-    
-    [super encodeRestorableStateWithCoder:coder];
-}
-
-
-- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    // Restore what you need here
-//    _color = [coder decodeObjectForKey: @"color"];
-//    _text = [coder decodeObjectForKey: @"text"];
-    
-    [super decodeRestorableStateWithCoder:coder];
-}
-
-
-- (void)applicationFinishedRestoringState
-{
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    // Call whatever function you need to visually restore
-    [self customSetup];
-}
+//#pragma mark state preservation / restoration
+//
+//- (void)encodeRestorableStateWithCoder:(NSCoder *)coder
+//{
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    
+//    // Save what you need here
+////    [coder encodeObject: _text forKey: @"text"];
+////    [coder encodeObject: _color forKey: @"color"];
+//    
+//    [super encodeRestorableStateWithCoder:coder];
+//}
+//
+//
+//- (void)decodeRestorableStateWithCoder:(NSCoder *)coder
+//{
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    
+//    // Restore what you need here
+////    _color = [coder decodeObjectForKey: @"color"];
+////    _text = [coder decodeObjectForKey: @"text"];
+//    
+//    [super decodeRestorableStateWithCoder:coder];
+//}
+//
+//
+//- (void)applicationFinishedRestoringState
+//{
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
+//    
+//    // Call whatever function you need to visually restore
+//    [self customSetup];
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

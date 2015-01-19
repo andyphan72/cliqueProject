@@ -26,6 +26,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *txtServicesLabel;
 @property (strong, nonatomic) IBOutlet UITextView *txtServicesDescription;
 @property (strong, nonatomic) IBOutlet UIImageView *imgServicesPhoto;
+@property (strong, nonatomic) IBOutlet UITextField *txtServicesDescDummy;
 
 
 - (IBAction)btnSaveServices:(id)sender;

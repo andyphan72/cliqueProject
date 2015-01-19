@@ -24,6 +24,7 @@
 		4EE9024B1964A28600AA3B42 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE902481964A28600AA3B42 /* Default.png */; };
 		4EE9024C1964A28600AA3B42 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE902491964A28600AA3B42 /* Default-568h@2x.png */; };
 		4EE9024E1964A29300AA3B42 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9024D1964A29300AA3B42 /* main.m */; };
+		A107CA1C1A6CB1EA0061A6C0 /* kualalumpur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A107CA1B1A6CB1EA0061A6C0 /* kualalumpur.jpg */; };
 		A12ADE661A519B7400F98AB5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12ADE651A519B7400F98AB5 /* SWRevealViewController.m */; };
 		A12ADE691A51A6CE00F98AB5 /* doritos1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A12ADE681A51A6CE00F98AB5 /* doritos1.jpg */; };
 		A13505E41A522BD800B628FF /* cliqueDB.rdb in Resources */ = {isa = PBXBuildFile; fileRef = A13505E31A522BD800B628FF /* cliqueDB.rdb */; };
@@ -99,6 +100,7 @@
 		4EE902481964A28600AA3B42 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = RevealControllerStoryboardExample2/Default.png; sourceTree = SOURCE_ROOT; };
 		4EE902491964A28600AA3B42 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "RevealControllerStoryboardExample2/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		4EE9024D1964A29300AA3B42 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RevealControllerStoryboardExample2/main.m; sourceTree = SOURCE_ROOT; };
+		A107CA1B1A6CB1EA0061A6C0 /* kualalumpur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kualalumpur.jpg; sourceTree = SOURCE_ROOT; };
 		A12ADE641A519B7400F98AB5 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
 		A12ADE651A519B7400F98AB5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
 		A12ADE681A51A6CE00F98AB5 /* doritos1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = doritos1.jpg; sourceTree = SOURCE_ROOT; };
@@ -285,6 +287,7 @@
 		A12ADE671A51A69F00F98AB5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A107CA1B1A6CB1EA0061A6C0 /* kualalumpur.jpg */,
 				A1E3A21B1A661004004C04AC /* plus.png */,
 				A1E3A2191A64D11A004C04AC /* discussion2.gif */,
 				A1E3A2171A64D0A9004C04AC /* discussion.png */,
@@ -995,6 +998,7 @@
 				A16D3BFD1A5D370200BD0D6D /* search.png in Resources */,
 				4EE902451964A27600AA3B42 /* reveal-icon@2x.png in Resources */,
 				A1E3A2141A64CD96004C04AC /* likes.gif in Resources */,
+				A107CA1C1A6CB1EA0061A6C0 /* kualalumpur.jpg in Resources */,
 				A135061F1A57A96100B628FF /* photo1.png in Resources */,
 				A1E3A21A1A64D11A004C04AC /* discussion2.gif in Resources */,
 				A1E3A2091A63442F004C04AC /* workshop3.jpg in Resources */,

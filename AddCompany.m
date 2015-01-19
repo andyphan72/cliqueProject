@@ -20,15 +20,15 @@
 @end
 
 // This is to set cell padding to UItextField
-@implementation UITextField (custom)
-- (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectMake(bounds.origin.x + 10, bounds.origin.y + 8,
-                      bounds.size.width - 20, bounds.size.height - 16);
-}
-- (CGRect)editingRectForBounds:(CGRect)bounds {
-    return [self textRectForBounds:bounds];
-}
-@end
+//@implementation UITextField (custom)
+//- (CGRect)textRectForBounds:(CGRect)bounds {
+//    return CGRectMake(bounds.origin.x + 10, bounds.origin.y + 8,
+//                      bounds.size.width - 20, bounds.size.height - 16);
+//}
+//- (CGRect)editingRectForBounds:(CGRect)bounds {
+//    return [self textRectForBounds:bounds];
+//}
+//@end
 
 
 @implementation AddCompany{
@@ -43,6 +43,12 @@
     [self.view addGestureRecognizer:tap];
     
     [self.view endEditing:YES];
+    
+    //for textview border
+    CGRect frameRect = _txtCompanyDescDummy.frame;
+    frameRect.size.height = 102;
+    _txtCompanyDescDummy.frame = frameRect;
+    
 
     // Category piker
     self.pickerCategory = [[UIPickerView alloc] init];
@@ -113,7 +119,7 @@
     FMDatabase *database = [FMDatabase databaseWithPath:dbPath];
     [database open];
     
-    NSString *query = [NSString stringWithFormat:@"INSERT INTO company ('companyName', 'companyDescription', 'category', 'subCategory') VALUES('%@','%@','%@','%@')",_txtCompanyName.text,_txtCompanyDescription.text,_txtCompanyCatergory.text,_txtCompanySubCategory.text];
+    NSString *query = [NSString stringWithFormat:@"INSERT INTO company ('companyName', 'companyDescription', 'category', 'subCategory') VALUES('%@','%@','%@','%@')",[_txtCompanyName.text uppercaseString],_txtCompanyDescription.text,_txtCompanyCatergory.text,_txtCompanySubCategory.text];
     
     [database executeUpdate:query];
     
