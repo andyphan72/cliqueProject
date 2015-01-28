@@ -40,7 +40,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    	<key>NSLocationWhenInUseUsageDescription</key>
-    	<string>Use location services only when the app is in use</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Use location services only when the app is in use</string>
 </dict>
 </plist>
