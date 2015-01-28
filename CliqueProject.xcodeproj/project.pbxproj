@@ -25,6 +25,7 @@
 		4EE9024C1964A28600AA3B42 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EE902491964A28600AA3B42 /* Default-568h@2x.png */; };
 		4EE9024E1964A29300AA3B42 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EE9024D1964A29300AA3B42 /* main.m */; };
 		A107CA1C1A6CB1EA0061A6C0 /* kualalumpur.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A107CA1B1A6CB1EA0061A6C0 /* kualalumpur.jpg */; };
+		A107CA1E1A6CB48D0061A6C0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A107CA1D1A6CB48D0061A6C0 /* Images.xcassets */; };
 		A12ADE661A519B7400F98AB5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A12ADE651A519B7400F98AB5 /* SWRevealViewController.m */; };
 		A12ADE691A51A6CE00F98AB5 /* doritos1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A12ADE681A51A6CE00F98AB5 /* doritos1.jpg */; };
 		A13505E41A522BD800B628FF /* cliqueDB.rdb in Resources */ = {isa = PBXBuildFile; fileRef = A13505E31A522BD800B628FF /* cliqueDB.rdb */; };
@@ -63,6 +64,7 @@
 		A16D3C021A5E2FF700BD0D6D /* folder_add.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A16D3C001A5E2FF700BD0D6D /* folder_add.jpeg */; };
 		A16D3C031A5E2FF700BD0D6D /* folder.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = A16D3C011A5E2FF700BD0D6D /* folder.jpeg */; };
 		A17B31151A5ED8CA00706E14 /* close.gif in Resources */ = {isa = PBXBuildFile; fileRef = A17B31141A5ED8CA00706E14 /* close.gif */; };
+		A1D68A461A72374300893537 /* EditCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D68A451A72374300893537 /* EditCompany.m */; };
 		A1E3A2071A63442F004C04AC /* workshop1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E3A2031A63442F004C04AC /* workshop1.jpg */; };
 		A1E3A2081A63442F004C04AC /* workshop2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E3A2041A63442F004C04AC /* workshop2.jpg */; };
 		A1E3A2091A63442F004C04AC /* workshop3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1E3A2051A63442F004C04AC /* workshop3.jpg */; };
@@ -101,6 +103,7 @@
 		4EE902491964A28600AA3B42 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "RevealControllerStoryboardExample2/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		4EE9024D1964A29300AA3B42 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RevealControllerStoryboardExample2/main.m; sourceTree = SOURCE_ROOT; };
 		A107CA1B1A6CB1EA0061A6C0 /* kualalumpur.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kualalumpur.jpg; sourceTree = SOURCE_ROOT; };
+		A107CA1D1A6CB48D0061A6C0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CliqueProject/Images.xcassets; sourceTree = "<group>"; };
 		A12ADE641A519B7400F98AB5 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
 		A12ADE651A519B7400F98AB5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
 		A12ADE681A51A6CE00F98AB5 /* doritos1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = doritos1.jpg; sourceTree = SOURCE_ROOT; };
@@ -159,6 +162,8 @@
 		A16D3C001A5E2FF700BD0D6D /* folder_add.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = folder_add.jpeg; sourceTree = SOURCE_ROOT; };
 		A16D3C011A5E2FF700BD0D6D /* folder.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = folder.jpeg; sourceTree = SOURCE_ROOT; };
 		A17B31141A5ED8CA00706E14 /* close.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = close.gif; sourceTree = SOURCE_ROOT; };
+		A1D68A441A72374300893537 /* EditCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCompany.h; sourceTree = SOURCE_ROOT; };
+		A1D68A451A72374300893537 /* EditCompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCompany.m; sourceTree = SOURCE_ROOT; };
 		A1E3A2031A63442F004C04AC /* workshop1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = workshop1.jpg; sourceTree = SOURCE_ROOT; };
 		A1E3A2041A63442F004C04AC /* workshop2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = workshop2.jpg; sourceTree = SOURCE_ROOT; };
 		A1E3A2051A63442F004C04AC /* workshop3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = workshop3.jpg; sourceTree = SOURCE_ROOT; };
@@ -196,6 +201,7 @@
 		01FB865A169E2D8B00A0A1A8 = {
 			isa = PBXGroup;
 			children = (
+				A107CA1D1A6CB48D0061A6C0 /* Images.xcassets */,
 				01FB866F169E2D8B00A0A1A8 /* RevealControllerStoryboardExample */,
 				01FB868C169E2DA500A0A1A8 /* SWRevealViewController */,
 				01FB8668169E2D8B00A0A1A8 /* Frameworks */,
@@ -905,6 +911,8 @@
 				A1526B9D1A5CE79E002DA089 /* AddServices.m */,
 				A1526B9F1A5D0510002DA089 /* AddProduct.h */,
 				A1526BA01A5D0510002DA089 /* AddProduct.m */,
+				A1D68A441A72374300893537 /* EditCompany.h */,
+				A1D68A451A72374300893537 /* EditCompany.m */,
 			);
 			name = Company;
 			sourceTree = "<group>";
@@ -967,6 +975,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 01FB865A169E2D8B00A0A1A8;
 			productRefGroup = 01FB8666169E2D8B00A0A1A8 /* Products */;
@@ -992,6 +1001,7 @@
 				A1E3A2181A64D0A9004C04AC /* discussion.png in Resources */,
 				A1E3A2081A63442F004C04AC /* workshop2.jpg in Resources */,
 				A16D3BFB1A5D36F500BD0D6D /* location.png in Resources */,
+				A107CA1E1A6CB48D0061A6C0 /* Images.xcassets in Resources */,
 				4EE9023F1964A22200AA3B42 /* MainStoryboard.storyboard in Resources */,
 				A17B31151A5ED8CA00706E14 /* close.gif in Resources */,
 				A16D3BF71A5D352800BD0D6D /* home.gif in Resources */,
@@ -1040,6 +1050,7 @@
 				A13506021A522CDC00B628FF /* FMDatabase.m in Sources */,
 				4EE902341964A1DE00AA3B42 /* MenuViewController.m in Sources */,
 				A1526BA11A5D0510002DA089 /* AddProduct.m in Sources */,
+				A1D68A461A72374300893537 /* EditCompany.m in Sources */,
 				4EE902421964A25D00AA3B42 /* ColorViewController.m in Sources */,
 				A13505ED1A522C1200B628FF /* MerchantListing.m in Sources */,
 				A13506091A5278BB00B628FF /* AddCompany.m in Sources */,
@@ -1142,6 +1153,8 @@
 		01FB868A169E2D8B00A0A1A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
@@ -1160,6 +1173,8 @@
 		01FB868B169E2D8B00A0A1A8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
